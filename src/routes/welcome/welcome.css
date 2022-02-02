@@ -2,6 +2,16 @@
   margin: 10rem 0;
 }
 
+.welcome header .title {
+  font-size: 5rem;
+  font-weight: 600;
+}
+
+.welcome header .sub-title {
+  font-size: 2rem;
+  font-weight: 400;
+}
+
 button {
   padding: 0.5rem 1rem;
   background: #7c3aed;

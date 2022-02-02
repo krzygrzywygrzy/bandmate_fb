@@ -3,6 +3,16 @@
 .welcome {
   header {
     margin: 10rem 0;
+
+    .title {
+      font-size: 5rem;
+      font-weight: 600;
+    }
+
+    .sub-title {
+      font-size: 2rem;
+      font-weight: 400;
+    }
   }
 }
 

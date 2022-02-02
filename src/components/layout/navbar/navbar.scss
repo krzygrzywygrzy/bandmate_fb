@@ -1,8 +1,18 @@
 .navbar {
   position: sticky;
   top: 0;
+  padding: 0.5rem 5rem;
+  border-bottom: 1px solid rgb(221, 221, 221);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   &-title {
     font-size: 1.1rem;
+  }
+
+  .auth {
+    font-size: 1rem;
   }
 }
