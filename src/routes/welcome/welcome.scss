@@ -1,5 +1,13 @@
+@import "../../scss/global";
+
 .welcome {
   header {
     margin: 10rem 0;
   }
+}
+
+button {
+  @include button-mixin;
+  font-size: 1.25rem;
+  width: 360px;
 }

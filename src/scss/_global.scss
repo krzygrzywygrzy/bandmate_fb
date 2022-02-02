@@ -1,0 +1,11 @@
+@import "colors";
+
+@mixin button-mixin {
+  padding: 0.5rem 1rem;
+  background: $purple;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: inherit;
+}

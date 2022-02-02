@@ -1,4 +1,16 @@
 .welcome header {
   margin: 10rem 0;
 }
+
+button {
+  padding: 0.5rem 1rem;
+  background: #7c3aed;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1.25rem;
+  width: 360px;
+}
 /*# sourceMappingURL=welcome.css.map */
