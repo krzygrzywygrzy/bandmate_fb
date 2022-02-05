@@ -10,6 +10,8 @@ export type JoinInput = {
 };
 
 const Join: React.FC = () => {
+  const [genres, setGenres] = useState<string>();
+
   const { register, handleSubmit } = useForm<JoinInput>();
   const onSubmit: SubmitHandler<JoinInput> = async (formData) => {
     //TODO: add user to db
