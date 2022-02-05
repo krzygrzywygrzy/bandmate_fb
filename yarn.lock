@@ -7624,6 +7624,11 @@ react-scripts@5.0.0:
   optionalDependencies:
     fsevents "^2.3.2"
 
+react-spotify-embed@^0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/react-spotify-embed/-/react-spotify-embed-0.2.3.tgz#ec6c0928449d34b482542b47246d4125df94b921"
+  integrity sha512-T4ceNkGn5M1ry/Y39I8HyhjSxeF2qv2W4uSK8XoB12r4PWPSQyuX3LOcVV/1mycQQUzPQlgwT1E6KGITEjvcJg==
+
 react@^17.0.2:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react/-/react-17.0.2.tgz#d0b5cc516d29eb3eee383f75b62864cfb6800037"

@@ -3,6 +3,8 @@ import "./join.css";
 import { useForm, SubmitHandler } from "react-hook-form";
 import ListSelect from "../../components/input/ListSelect";
 import { genresToSelect, instrumentsToSelect } from "../../core/exports";
+import isValidUrl from "../../core/isValidUrl";
+import Spotify from "react-spotify-embed";
 
 export type JoinInput = {
   name: string;
@@ -16,9 +18,12 @@ const Join: React.FC = () => {
   const [genres, setGenres] = useState<string[]>([]);
   const [instruments, setInstruments] = useState<string[]>([]);
 
+  const [spotify, setSpotify] = useState<string>();
+
   const { register, handleSubmit } = useForm<JoinInput>();
   const onSubmit: SubmitHandler<JoinInput> = async (formData) => {
     //TODO: add user to db
+    console.log(formData);
   };
 
   return (
@@ -80,6 +85,20 @@ const Join: React.FC = () => {
           setData={(data) => setInstruments(data)}
           toSelect={instrumentsToSelect}
         />
+      </section>
+      <section className="join-width">
+        <div className="section-title">You can also paste Spotify link...</div>
+        <br />
+        <input
+          placeholder="link to song or album..."
+          className="text-input"
+          onChange={(e) => setSpotify(e.target.value)}
+          value={spotify}
+        />
+        <br />
+        {spotify && isValidUrl(spotify) && (
+          <Spotify style={{ width: "100%" }} link={spotify} />
+        )}
       </section>
     </div>
   );
