@@ -3,9 +3,29 @@
   margin: auto;
 }
 
+.text-input {
+  font-family: inherit;
+  margin-bottom: 0.5rem;
+  border: none;
+  border-bottom: 1px solid #dddddd;
+  padding: 0.5rem 1rem;
+  width: 90%;
+  -webkit-transition: border 0.25s ease-in-out;
+  transition: border 0.25s ease-in-out;
+}
+
+.text-input:focus {
+  outline: none;
+  border-color: black;
+  border-width: 1px;
+}
+
 @media (min-width: 768px) {
   .container {
     width: 760px;
+  }
+  .text-input {
+    width: 350px;
   }
 }
 
@@ -28,11 +48,13 @@
 .welcome header .title {
   font-size: 3rem;
   font-weight: 600;
+  text-align: center;
 }
 
 .welcome header .sub-title {
   font-size: 1rem;
   font-weight: 400;
+  text-align: center;
 }
 
 .welcome .join button {
@@ -43,10 +65,15 @@
   border-radius: 5px;
   cursor: pointer;
   font-family: inherit;
+  margin: auto;
   font-size: 1.25rem;
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .welcome .join button {
+    margin: 0;
+  }
 }
 
 @media (min-width: 768px) {

@@ -7,11 +7,13 @@
     .title {
       font-size: 3rem;
       font-weight: 600;
+      text-align: center;
     }
 
     .sub-title {
       font-size: 1rem;
       font-weight: 400;
+      text-align: center;
     }
   }
 
@@ -19,9 +21,7 @@
     button {
       @include button-mixin;
       font-size: 1.25rem;
-      width: 90%;
-      margin-left: auto;
-      margin-right: auto;
+      width: 100%;
     }
   }
 }

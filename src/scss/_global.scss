@@ -8,6 +8,11 @@
   border-radius: 5px;
   cursor: pointer;
   font-family: inherit;
+  margin: auto;
+
+  @media (min-width: 768px) {
+    margin: 0;
+  }
 }
 
 .container {
@@ -15,9 +20,29 @@
   margin: auto;
 }
 
+.text-input {
+  font-family: inherit;
+  margin-bottom: 0.5rem;
+  border: none;
+  border-bottom: 1px solid $gray;
+  padding: 0.5rem 1rem;
+  width: 90%;
+  transition: border 0.25s ease-in-out;
+}
+
+.text-input:focus {
+  outline: none;
+  border-color: black;
+  border-width: 1px;
+}
+
 @media (min-width: 768px) {
   .container {
     width: 760px;
+  }
+
+  .text-input {
+    width: 350px;
   }
 }
 

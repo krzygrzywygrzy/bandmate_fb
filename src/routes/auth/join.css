@@ -1,0 +1,19 @@
+#join {
+  margin-top: 2rem;
+}
+
+#join form div {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+#join section {
+  margin-top: 2rem;
+}
+
+@media (min-width: 768px) {
+  #join form div {
+    font-size: 2rem;
+  }
+}
+/*# sourceMappingURL=join.css.map */
