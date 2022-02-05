@@ -3,6 +3,7 @@
   top: 0;
   padding: 0.5rem 0;
   border-bottom: 1px solid rgb(221, 221, 221);
+  background: white;
 
   &-container {
     display: flex;
@@ -15,6 +16,6 @@
   }
 
   .auth {
-    font-size: 1rem;
+    font-size: 0.75rem;
   }
 }

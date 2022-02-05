@@ -1,22 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./join.css";
 import { useForm, SubmitHandler } from "react-hook-form";
 import ListSelect from "../../components/input/ListSelect";
-import { genresToSelect } from "../../core/exports";
+import { genresToSelect, instrumentsToSelect } from "../../core/exports";
 
 export type JoinInput = {
   name: string;
   surname: string;
   email: string;
   password: string;
+  description: string;
 };
 
 const Join: React.FC = () => {
   const [genres, setGenres] = useState<string[]>([]);
-
-  useEffect(() => {
-    console.log(genres);
-  }, [genres]);
+  const [instruments, setInstruments] = useState<string[]>([]);
 
   const { register, handleSubmit } = useForm<JoinInput>();
   const onSubmit: SubmitHandler<JoinInput> = async (formData) => {
@@ -25,8 +23,10 @@ const Join: React.FC = () => {
 
   return (
     <div className="container" id="join">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>First enter some primary information</div>
+      <form onSubmit={handleSubmit(onSubmit)} className="join-width">
+        <div className="section-title">
+          First enter some primary information
+        </div>
         <input
           {...register("name")}
           placeholder="name..."
@@ -38,10 +38,17 @@ const Join: React.FC = () => {
           placeholder="surname..."
           className="text-input"
         />
+        <textarea
+          rows={10}
+          placeholder="your description..."
+          {...register("description")}
+        ></textarea>
         <br />
         <br />
         <br />
-        <div>First enter some primary information</div>
+        <div className="section-title">
+          We also need some way to authenticate you...
+        </div>
         <input
           {...register("email")}
           placeholder="email..."
@@ -56,11 +63,22 @@ const Join: React.FC = () => {
         />
         <br />
       </form>
-      <section>
+      <section className="join-width">
+        <div className="section-title">Select genres you like</div>
+        <br />
         <ListSelect
           data={genres}
           setData={(data) => setGenres(data)}
           toSelect={genresToSelect}
+        />
+      </section>
+      <section className="join-width">
+        <div className="section-title">Select instruments you play</div>
+        <br />
+        <ListSelect
+          data={instruments}
+          setData={(data) => setInstruments(data)}
+          toSelect={instrumentsToSelect}
         />
       </section>
     </div>

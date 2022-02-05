@@ -3,7 +3,6 @@
 }
 
 #join form div {
-  font-size: 1.25rem;
   margin-bottom: 1rem;
 }
 
@@ -11,9 +10,22 @@
   margin-top: 2rem;
 }
 
+.section-title {
+  font-size: 1.25rem;
+}
+
+.join-width {
+  width: 90%;
+  margin: auto;
+}
+
 @media (min-width: 768px) {
-  #join form div {
-    font-size: 2rem;
+  .join-width {
+    width: 350px;
+    margin: 0;
+  }
+  .section-title {
+    font-size: 1.75rem;
   }
 }
 /*# sourceMappingURL=join.css.map */

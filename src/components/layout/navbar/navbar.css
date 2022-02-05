@@ -4,6 +4,7 @@
   top: 0;
   padding: 0.5rem 0;
   border-bottom: 1px solid #dddddd;
+  background: white;
 }
 
 .navbar-container {
@@ -23,6 +24,6 @@
 }
 
 .navbar .auth {
-  font-size: 1rem;
+  font-size: 0.75rem;
 }
 /*# sourceMappingURL=navbar.css.map */

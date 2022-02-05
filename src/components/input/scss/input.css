@@ -10,9 +10,11 @@
   padding: 0.5rem 1rem;
   border-radius: 5px;
   margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
   -webkit-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
   cursor: pointer;
+  font-size: 0.9rem;
 }
 
 .selective-button-selected {

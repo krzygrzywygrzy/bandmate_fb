@@ -30,9 +30,23 @@
   transition: border 0.25s ease-in-out;
 }
 
-.text-input:focus {
+.text-input:focus,
+textarea:focus {
   outline: none;
   border-color: black;
+}
+
+textarea {
+  font-family: inherit;
+  margin-bottom: 0.5rem;
+  border: none;
+  border: 1px solid $gray;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  width: 90%;
+  transition: border 0.25s ease-in-out;
+  resize: none;
+  box-sizing: unset;
 }
 
 @media (min-width: 768px) {
