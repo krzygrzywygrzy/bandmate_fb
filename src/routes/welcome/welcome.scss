@@ -5,19 +5,42 @@
     margin: 10rem 0;
 
     .title {
-      font-size: 5rem;
+      font-size: 3rem;
       font-weight: 600;
     }
 
     .sub-title {
-      font-size: 2rem;
+      font-size: 1rem;
       font-weight: 400;
+    }
+  }
+
+  .join {
+    button {
+      @include button-mixin;
+      font-size: 1.25rem;
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
     }
   }
 }
 
-button {
-  @include button-mixin;
-  font-size: 1.25rem;
-  width: 360px;
+@media (min-width: 768px) {
+  .welcome {
+    header {
+      .title {
+        font-size: 5rem;
+      }
+      .sub-title {
+        font-size: 2rem;
+      }
+    }
+
+    .join {
+      button {
+        width: 350px;
+      }
+    }
+  }
 }

@@ -1,18 +1,41 @@
+.container {
+  width: 90%;
+  margin: auto;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 760px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    width: 980px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 1190px;
+  }
+}
+
 .welcome header {
   margin: 10rem 0;
 }
 
 .welcome header .title {
-  font-size: 5rem;
+  font-size: 3rem;
   font-weight: 600;
 }
 
 .welcome header .sub-title {
-  font-size: 2rem;
+  font-size: 1rem;
   font-weight: 400;
 }
 
-button {
+.welcome .join button {
   padding: 0.5rem 1rem;
   background: #7c3aed;
   border: none;
@@ -21,6 +44,20 @@ button {
   cursor: pointer;
   font-family: inherit;
   font-size: 1.25rem;
-  width: 360px;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 768px) {
+  .welcome header .title {
+    font-size: 5rem;
+  }
+  .welcome header .sub-title {
+    font-size: 2rem;
+  }
+  .welcome .join button {
+    width: 350px;
+  }
 }
 /*# sourceMappingURL=welcome.css.map */
