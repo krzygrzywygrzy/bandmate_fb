@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./join.css";
 import { useForm, SubmitHandler } from "react-hook-form";
+import ListSelect from "../../components/input/ListSelect";
+import { genresToSelect } from "../../core/exports";
 
 export type JoinInput = {
   name: string;
@@ -10,7 +12,11 @@ export type JoinInput = {
 };
 
 const Join: React.FC = () => {
-  const [genres, setGenres] = useState<string>();
+  const [genres, setGenres] = useState<string[]>([]);
+
+  useEffect(() => {
+    console.log(genres);
+  }, [genres]);
 
   const { register, handleSubmit } = useForm<JoinInput>();
   const onSubmit: SubmitHandler<JoinInput> = async (formData) => {
@@ -50,7 +56,13 @@ const Join: React.FC = () => {
         />
         <br />
       </form>
-      <section></section>
+      <section>
+        <ListSelect
+          data={genres}
+          setData={(data) => setGenres(data)}
+          toSelect={genresToSelect}
+        />
+      </section>
     </div>
   );
 };
