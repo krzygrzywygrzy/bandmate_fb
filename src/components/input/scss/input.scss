@@ -23,3 +23,26 @@
 .selective-button-unselected {
   border: 2px solid black;
 }
+
+.image-picker {
+  display: none;
+}
+
+.image-picker-label {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border: 2px solid black;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+
+.image-picker-display {
+  margin-top: 2rem;
+  height: 250px;
+  display: flex;
+}
+
+.image-picker-image {
+  height: 100%;
+  margin-right: 0.5rem;
+}

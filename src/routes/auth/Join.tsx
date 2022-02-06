@@ -5,6 +5,7 @@ import ListSelect from "../../components/input/ListSelect";
 import { genresToSelect, instrumentsToSelect } from "../../core/exports";
 import isValidUrl from "../../core/isValidUrl";
 import Spotify from "react-spotify-embed";
+import ImagePicker from "../../components/input/ImagePicker";
 
 export type JoinInput = {
   name: string;
@@ -19,6 +20,7 @@ const Join: React.FC = () => {
   const [instruments, setInstruments] = useState<string[]>([]);
 
   const [spotify, setSpotify] = useState<string>();
+  const [photos, setPhotos] = useState<File[]>([]);
 
   const { register, handleSubmit } = useForm<JoinInput>();
   const onSubmit: SubmitHandler<JoinInput> = async (formData) => {
@@ -100,6 +102,14 @@ const Join: React.FC = () => {
           <Spotify style={{ width: "100%" }} link={spotify} />
         )}
       </section>
+      <section className="join-width">
+        <div className="section-title">
+          And finally... you can share some photos of yourself
+        </div>
+        <br />
+        <ImagePicker images={photos} setImages={(p) => setPhotos(p)} />
+      </section>
+      <div className="bottom-margin"></div>
     </div>
   );
 };

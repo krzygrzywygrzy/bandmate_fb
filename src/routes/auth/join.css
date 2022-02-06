@@ -19,6 +19,10 @@
   margin: auto;
 }
 
+.bottom-margin {
+  margin-bottom: 7rem;
+}
+
 @media (min-width: 768px) {
   .join-width {
     width: 350px;
