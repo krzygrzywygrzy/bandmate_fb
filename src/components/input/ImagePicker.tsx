@@ -7,6 +7,7 @@ type Props = {
 
 const ImagePicker: React.FC<Props> = ({ setImages, images }) => {
   const imageSelectHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
     let f = Array.from(e.target.files ?? []);
     setImages(f);
   };

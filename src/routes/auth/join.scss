@@ -5,6 +5,18 @@
     div {
       margin-bottom: 1rem;
     }
+
+    button {
+      margin-top: 2rem;
+      border: none;
+      background: black;
+      color: white;
+      padding: 0.5rem 1rem;
+      font-family: inherit;
+      font-size: 1rem;
+      border-radius: 5px;
+      width: 100%;
+    }
   }
 
   section {
@@ -17,7 +29,6 @@
 }
 
 .join-width {
-  width: 90%;
   margin: auto;
 }
 
@@ -26,6 +37,14 @@
 }
 
 @media (min-width: 768px) {
+  #join {
+    form {
+      button {
+        width: 350px;
+      }
+    }
+  }
+
   .join-width {
     width: 350px;
     margin: 0;

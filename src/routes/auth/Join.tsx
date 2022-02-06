@@ -69,46 +69,50 @@ const Join: React.FC = () => {
           className="text-input"
         />
         <br />
+        <section className="join-width">
+          <div className="section-title">Select genres you like</div>
+          <br />
+          <ListSelect
+            data={genres}
+            setData={(data) => setGenres(data)}
+            toSelect={genresToSelect}
+          />
+        </section>
+        <section className="join-width">
+          <div className="section-title">Select instruments you play</div>
+          <br />
+          <ListSelect
+            data={instruments}
+            setData={(data) => setInstruments(data)}
+            toSelect={instrumentsToSelect}
+          />
+        </section>
+        <section className="join-width">
+          <div className="section-title">
+            You can also paste Spotify link...
+          </div>
+          <br />
+          <input
+            placeholder="link to song or album..."
+            className="text-input"
+            onChange={(e) => setSpotify(e.target.value)}
+            value={spotify}
+          />
+          <br />
+          {spotify && isValidUrl(spotify) && (
+            <Spotify style={{ width: "100%" }} link={spotify} />
+          )}
+        </section>
+        <section className="join-width">
+          <div className="section-title">
+            And finally... you can share some photos of yourself
+          </div>
+          <br />
+          <ImagePicker images={photos} setImages={(p) => setPhotos(p)} />
+        </section>
+        <button className="">Join</button>
       </form>
-      <section className="join-width">
-        <div className="section-title">Select genres you like</div>
-        <br />
-        <ListSelect
-          data={genres}
-          setData={(data) => setGenres(data)}
-          toSelect={genresToSelect}
-        />
-      </section>
-      <section className="join-width">
-        <div className="section-title">Select instruments you play</div>
-        <br />
-        <ListSelect
-          data={instruments}
-          setData={(data) => setInstruments(data)}
-          toSelect={instrumentsToSelect}
-        />
-      </section>
-      <section className="join-width">
-        <div className="section-title">You can also paste Spotify link...</div>
-        <br />
-        <input
-          placeholder="link to song or album..."
-          className="text-input"
-          onChange={(e) => setSpotify(e.target.value)}
-          value={spotify}
-        />
-        <br />
-        {spotify && isValidUrl(spotify) && (
-          <Spotify style={{ width: "100%" }} link={spotify} />
-        )}
-      </section>
-      <section className="join-width">
-        <div className="section-title">
-          And finally... you can share some photos of yourself
-        </div>
-        <br />
-        <ImagePicker images={photos} setImages={(p) => setPhotos(p)} />
-      </section>
+
       <div className="bottom-margin"></div>
     </div>
   );
