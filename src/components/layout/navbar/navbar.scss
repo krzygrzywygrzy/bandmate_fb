@@ -1,3 +1,5 @@
+@import "../../../scss/colors";
+
 .navbar {
   position: sticky;
   top: 0;
@@ -16,6 +18,17 @@
   }
 
   .auth {
-    font-size: 0.75rem;
+    font-size: 0.9rem;
+    display: flex;
+
+    .register {
+      margin-left: 0.5rem;
+      color: $purple;
+      font-weight: 600;
+    }
+
+    div {
+      cursor: pointer;
+    }
   }
 }

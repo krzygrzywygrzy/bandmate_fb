@@ -1,0 +1,81 @@
+@import "../../../scss/colors";
+@import "../../../scss/global";
+
+.popup {
+  background: rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.login-popup {
+  background: white;
+  width: 90%;
+
+  border-radius: 5px;
+
+  .close {
+    display: flex;
+    justify-content: end;
+
+    &-button {
+      display: flex;
+      padding: 0.75rem;
+      cursor: pointer;
+    }
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 2rem;
+
+    span {
+      color: $purple;
+    }
+  }
+
+  .form {
+    margin: 0 1rem;
+    margin-bottom: 0.75rem;
+
+    .login-input {
+      width: 100%;
+      padding: 0.5rem 1rem;
+      border: 2px solid $gray;
+      border-radius: 5px;
+      margin-bottom: 0.5rem;
+      transition: all 0.25s ease-in-out;
+      color: $gray;
+      font-family: inherit;
+    }
+
+    .login-input:focus {
+      outline: none;
+      border-color: $purple;
+      color: $purple;
+    }
+
+    button {
+      @include button-mixin;
+    }
+
+    .err-message {
+      text-align: center;
+      color: $purple;
+      margin-bottom: 0.75rem;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .login-popup {
+    width: 350px;
+    margin-bottom: 15rem;
+  }
+}

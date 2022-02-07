@@ -24,6 +24,19 @@
 }
 
 .navbar .auth {
-  font-size: 0.75rem;
+  font-size: 0.9rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.navbar .auth .register {
+  margin-left: 0.5rem;
+  color: #7c3aed;
+  font-weight: 600;
+}
+
+.navbar .auth div {
+  cursor: pointer;
 }
 /*# sourceMappingURL=navbar.css.map */

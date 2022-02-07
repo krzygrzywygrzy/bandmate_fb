@@ -25,14 +25,16 @@ const ImagePicker: React.FC<Props> = ({ setImages, images }) => {
         id="image-picker"
         className="image-picker"
       />
-      <div className="image-picker-display">
-        {images.map((image) => (
-          <img
-            src={URL.createObjectURL(image)}
-            className="image-picker-image"
-          />
-        ))}
-      </div>
+      {images.length > 0 && (
+        <div className="image-picker-display">
+          {images.map((image) => (
+            <img
+              src={URL.createObjectURL(image)}
+              className="image-picker-image"
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

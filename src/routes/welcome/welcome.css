@@ -58,7 +58,7 @@ textarea {
 }
 
 .welcome header {
-  margin: 10rem 0;
+  margin: 5rem 0 2rem 0;
 }
 
 .welcome header .title {
@@ -93,6 +93,9 @@ textarea {
 }
 
 @media (min-width: 768px) {
+  .welcome header {
+    margin: 10rem 0;
+  }
   .welcome header .title {
     font-size: 5rem;
   }
