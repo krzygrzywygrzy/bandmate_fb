@@ -9,9 +9,9 @@ export type UserState = {
   error: any | null;
 };
 
-const userReducer: Reducer<UserState> = (
+const userReducer: Reducer<UserState, UserAction> = (
   state = { loading: false, data: null, error: null },
-  action: UserAction
+  action
 ) => {
   switch (action.type) {
     case UserActionType.LOAD: {
