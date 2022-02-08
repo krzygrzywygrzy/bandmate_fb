@@ -7,7 +7,11 @@ import isValidUrl from "../../core/isValidUrl";
 import Spotify from "react-spotify-embed";
 import ImagePicker from "../../components/input/ImagePicker";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase";
+import { auth, firestore } from "../../firebase";
+import uploadFile from "../../core/uploadFile";
+import { doc, setDoc } from "firebase/firestore";
+import { useDispatch } from "react-redux";
+import User from "../../models/User";
 
 export type JoinInput = {
   name: string;
@@ -27,11 +31,28 @@ const Join: React.FC = () => {
   const { register, handleSubmit } = useForm<JoinInput>();
   const onSubmit: SubmitHandler<JoinInput> = async (formData) => {
     try {
-      var user = await createUserWithEmailAndPassword(
+      //sign in new user
+      var credential = await createUserWithEmailAndPassword(
         auth,
         formData.email,
         formData.password ?? ""
       );
+
+      let urls: string[] = [];
+      for (let photo of photos) {
+        urls.push(await uploadFile(photo, credential.user.uid));
+      }
+
+      delete formData.password;
+      let user: User = {
+        ...formData,
+        spotify,
+        id: credential.user.uid,
+        instruments,
+        genres,
+        photoUrls: urls,
+      };
+      await setDoc(doc(firestore, "users", credential.user.uid), user);
     } catch (err: any) {
       console.log(err);
     }
