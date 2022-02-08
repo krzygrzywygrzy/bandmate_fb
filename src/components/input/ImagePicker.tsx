@@ -32,6 +32,7 @@ const ImagePicker: React.FC<Props> = ({ setImages, images }) => {
               key={image.name}
               src={URL.createObjectURL(image)}
               className="image-picker-image"
+              alt=""
             />
           ))}
         </div>

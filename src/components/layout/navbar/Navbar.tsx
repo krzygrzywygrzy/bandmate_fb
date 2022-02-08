@@ -5,8 +5,12 @@ import Popup from "../../popup/Popup";
 import "./navbar.css";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../../firebase";
+import { HiUserGroup, HiUserCircle, HiPaperAirplane } from "react-icons/hi";
+import { useLocation } from "wouter";
 
 const Navbar: React.FC = () => {
+  const [, setLocation] = useLocation();
+
   const [login, setLogin] = useState<boolean>(false);
   const [authState, setAuthState] = useState<boolean>(false);
 
@@ -34,7 +38,17 @@ const Navbar: React.FC = () => {
             </div>
           </div>
         ) : (
-          <div>log out</div>
+          <div className="auth">
+            <div className="auth-icon" onClick={() => setLocation("/")}>
+              <HiUserGroup size={24} />
+            </div>
+            <div className="auth-icon" onClick={() => setLocation("/messages")}>
+              <HiPaperAirplane size={24} />
+            </div>
+            <div className="auth-icon" onClick={() => setLocation("/account")}>
+              <HiUserCircle size={24} />
+            </div>
+          </div>
         )}
       </div>
       <Popup trigger={login}>

@@ -88,7 +88,7 @@ textarea {
   display: flex;
   -webkit-box-pack: end;
       -ms-flex-pack: end;
-          justify-content: end;
+          justify-content: flex-end;
 }
 
 .login-popup .close-button {

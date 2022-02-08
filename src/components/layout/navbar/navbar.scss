@@ -20,6 +20,12 @@
   .auth {
     font-size: 0.9rem;
     display: flex;
+    align-items: center;
+
+    &-icon {
+      display: flex;
+      margin-left: 0.5rem;
+    }
 
     .register {
       margin-left: 0.5rem;
