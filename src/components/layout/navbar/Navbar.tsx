@@ -27,7 +27,11 @@ const Navbar: React.FC = () => {
         {!authState ? (
           <div className="auth">
             <div onClick={() => setLogin(true)}>Login</div>
-            <div className="register">Register</div>
+            <div className="register">
+              <Link to="/join" className="register">
+                Register
+              </Link>
+            </div>
           </div>
         ) : (
           <div>log out</div>

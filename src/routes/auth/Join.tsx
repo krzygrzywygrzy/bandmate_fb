@@ -6,12 +6,14 @@ import { genresToSelect, instrumentsToSelect } from "../../core/exports";
 import isValidUrl from "../../core/isValidUrl";
 import Spotify from "react-spotify-embed";
 import ImagePicker from "../../components/input/ImagePicker";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase";
 
 export type JoinInput = {
   name: string;
   surname: string;
   email: string;
-  password: string;
+  password?: string;
   description: string;
 };
 
@@ -24,8 +26,15 @@ const Join: React.FC = () => {
 
   const { register, handleSubmit } = useForm<JoinInput>();
   const onSubmit: SubmitHandler<JoinInput> = async (formData) => {
-    //TODO: add user to db
-    console.log(formData);
+    try {
+      var user = await createUserWithEmailAndPassword(
+        auth,
+        formData.email,
+        formData.password ?? ""
+      );
+    } catch (err: any) {
+      console.log(err);
+    }
   };
 
   return (
@@ -57,14 +66,14 @@ const Join: React.FC = () => {
           We also need some way to authenticate you...
         </div>
         <input
-          {...register("email")}
+          {...register("email", { required: true })}
           placeholder="email..."
           className="text-input"
         />
         <br />
         <input
           type="password"
-          {...register("password")}
+          {...register("password", { required: true })}
           placeholder="password..."
           className="text-input"
         />

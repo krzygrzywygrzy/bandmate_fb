@@ -19,12 +19,7 @@ const LoginPopup: React.FC<Props> = ({ close }) => {
   const { register, handleSubmit } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
-      var res = await signInWithEmailAndPassword(
-        auth,
-        data.email,
-        data.password
-      );
-
+      await signInWithEmailAndPassword(auth, data.email, data.password);
       if (close) close();
     } catch (err: any) {
       setErrorMessage(err.message);
