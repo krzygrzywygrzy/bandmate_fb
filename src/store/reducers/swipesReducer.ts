@@ -1,4 +1,4 @@
-import { Reducer } from "react"
+import { Reducer } from "redux"
 import User from "../../models/User";
 import { SwipesActionType } from "../actions/actionTypes";
 import SwipesAction from "../actions/swipesActions";
@@ -10,9 +10,7 @@ export type SwipesState = {
 }
 
 const swipesReducer: Reducer<SwipesState, SwipesAction> = (state = {
-    loading: false, 
-    data: null,
-    error: null,
+    loading: false, data: null, error: null,
 }, action)=> {
   switch (action.type) {
     case SwipesActionType.LOAD: {
