@@ -29,6 +29,7 @@ const ImagePicker: React.FC<Props> = ({ setImages, images }) => {
         <div className="image-picker-display">
           {images.map((image) => (
             <img
+              key={image.name}
               src={URL.createObjectURL(image)}
               className="image-picker-image"
             />

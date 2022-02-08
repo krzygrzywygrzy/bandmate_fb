@@ -12,6 +12,8 @@ import uploadFile from "../../core/uploadFile";
 import { doc, setDoc } from "firebase/firestore";
 import { useDispatch } from "react-redux";
 import User from "../../models/User";
+import { UserActionType } from "../../store/actions/actionTypes";
+import { useLocation } from "wouter";
 
 export type JoinInput = {
   name: string;
@@ -22,6 +24,9 @@ export type JoinInput = {
 };
 
 const Join: React.FC = () => {
+  const dispatch = useDispatch();
+  const [, setLocation] = useLocation();
+
   const [genres, setGenres] = useState<string[]>([]);
   const [instruments, setInstruments] = useState<string[]>([]);
 
@@ -29,20 +34,26 @@ const Join: React.FC = () => {
   const [photos, setPhotos] = useState<File[]>([]);
 
   const { register, handleSubmit } = useForm<JoinInput>();
+  const [loading, setLoading] = useState<boolean>(false);
+  const [message, setMessage] = useState<string | null>(null);
   const onSubmit: SubmitHandler<JoinInput> = async (formData) => {
     try {
-      //sign in new user
+      setLoading(true);
+
+      //create new user
       var credential = await createUserWithEmailAndPassword(
         auth,
         formData.email,
         formData.password ?? ""
       );
 
+      //upload photos
       let urls: string[] = [];
       for (let photo of photos) {
         urls.push(await uploadFile(photo, credential.user.uid));
       }
 
+      //create doc with user data in firestore
       delete formData.password;
       let user: User = {
         ...formData,
@@ -52,9 +63,14 @@ const Join: React.FC = () => {
         genres,
         photoUrls: urls,
       };
-      await setDoc(doc(firestore, "users", credential.user.uid), user);
+      await setDoc(doc(firestore, "/users", credential.user.uid), user);
+
+      //dispatch user to store
+      dispatch({ type: UserActionType.LOADED, payload: user });
+      setLocation("/");
     } catch (err: any) {
-      console.log(err);
+      setMessage(err.message);
+      setLoading(false);
     }
   };
 
@@ -140,7 +156,9 @@ const Join: React.FC = () => {
           <br />
           <ImagePicker images={photos} setImages={(p) => setPhotos(p)} />
         </section>
-        <button className="">Join</button>
+
+        <button className="">{loading ? "Loading" : "Join"}</button>
+        {message && <div className="message">{message}</div>}
       </form>
 
       <div className="bottom-margin"></div>
