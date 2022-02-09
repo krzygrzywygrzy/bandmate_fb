@@ -9,7 +9,7 @@ const Home: React.FC = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadSwipes());
-  });
+  }, []);
 
   if (swipes.loading) {
     return <div className="container home">Loading...</div>;
@@ -21,7 +21,20 @@ const Home: React.FC = () => {
     );
   }
 
-  return swipes.data ? <div className="container home"></div> : <></>;
+  return swipes.data ? (
+    <div className="container home">
+      {swipes.data.length > 0 ? (
+        <div></div>
+      ) : (
+        <div className="home-zero-swipes">
+          <header>Nothing to display!</header>
+          <p>Come back later to find your bandmates!</p>
+        </div>
+      )}
+    </div>
+  ) : (
+    <></>
+  );
 };
 
 export default Home;

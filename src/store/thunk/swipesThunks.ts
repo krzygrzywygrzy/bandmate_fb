@@ -18,19 +18,19 @@ export const loadSwipes = (): ThunkAction<
   return async (dispatch: ThunkDispatch<RootState, unknown, SwipesAction>) => {
     try {
       dispatch({ type: SwipesActionType.LOAD });
-      
+
       const currentUser = auth.currentUser;
-      if(!currentUser) throw Error("User not logged in");
+      if (!currentUser) throw Error("User not logged in");
 
       const usersRef = collection(firestore, "users");
       const swipesQuery = query(usersRef, where("id", "!=", currentUser.uid));
 
       let swipes: User[] = [];
       const response = await getDocs(swipesQuery);
-      response.forEach((doc)=> {
+      response.forEach((doc) => {
         swipes.push(doc.data() as User);
       });
-      dispatch({type: SwipesActionType.LOADED, payload: swipes});
+      dispatch({ type: SwipesActionType.LOADED, payload: swipes });
     } catch (err: any) {
       dispatch({ type: SwipesActionType.ERROR, payload: err });
     }

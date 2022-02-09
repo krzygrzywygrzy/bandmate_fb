@@ -1,8 +1,9 @@
 {
     "version": 3,
-    "mappings": "AAAA,AAAA,KAAK,CAAC;EACJ,UAAU,EAAE,IAAI;CACjB",
+    "mappings": "AAEA,AAAA,KAAK,CAAC;EACJ,UAAU,EAAE,IAAI;EAChB,UAAU,EAAE,MAAM;CASnB;;AAPE,AACC,iBADW,CACX,MAAM,CAAC;EACL,SAAS,EAAE,MAAM;EACjB,KAAK,ECTF,OAAO;EDUV,WAAW,EAAE,GAAG;CACjB",
     "sources": [
-        "home.scss"
+        "home.scss",
+        "../../../scss/_colors.scss"
     ],
     "names": [],
     "file": "home.css"
