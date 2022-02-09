@@ -23,6 +23,9 @@ const userReducer: Reducer<UserState, UserAction> = (
     case UserActionType.ERROR: {
       return { loading: false, data: null, error: action.payload };
     }
+    case UserActionType.LOG_OUT: {
+      return { loading: false, data: null, error: null };
+    }
     default:
       return state;
   }

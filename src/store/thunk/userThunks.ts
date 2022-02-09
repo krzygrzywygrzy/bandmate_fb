@@ -26,6 +26,7 @@ export const getUser = (): ThunkAction<
 
       const response = await getDocs(userQuery);
       if (response.empty) throw Error("User not found!");
+
       dispatch({
         type: UserActionType.LOADED,
         payload: response.docs[0].data() as User,
@@ -33,5 +34,12 @@ export const getUser = (): ThunkAction<
     } catch (err: any) {
       dispatch({ type: UserActionType.ERROR, payload: err });
     }
+  };
+};
+
+export const logOut = (): ThunkAction<void, RootState, unknown, UserAction> => {
+  return async (dispatch: ThunkDispatch<RootState, unknown, UserAction>) => {
+    await auth.signOut();
+    dispatch({ type: UserActionType.LOG_OUT });
   };
 };

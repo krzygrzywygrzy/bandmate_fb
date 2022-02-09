@@ -15,6 +15,10 @@ interface Error {
   payload: Error;
 }
 
-type UserAction = Load | Loaded | Error;
+interface LogOut {
+  type: UserActionType.LOG_OUT;
+}
+
+type UserAction = Load | Loaded | Error | LogOut;
 
 export default UserAction;
