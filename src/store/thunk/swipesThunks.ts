@@ -2,7 +2,13 @@ import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { SwipesActionType } from "../actions/actionTypes";
 import SwipesAction from "../actions/swipesActions";
 import { RootState } from "../store";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { auth, firestore } from "../../firebase";
+import User from "../../models/User";
 
+/**
+ * thunk action that gets list of available swipes
+ */
 export const loadSwipes = (): ThunkAction<
   void,
   RootState,
@@ -12,7 +18,19 @@ export const loadSwipes = (): ThunkAction<
   return async (dispatch: ThunkDispatch<RootState, unknown, SwipesAction>) => {
     try {
       dispatch({ type: SwipesActionType.LOAD });
-      //TODO: get list of users
+      
+      const currentUser = auth.currentUser;
+      if(!currentUser) throw Error("User not logged in");
+
+      const usersRef = collection(firestore, "users");
+      const swipesQuery = query(usersRef, where("id", "!=", currentUser.uid));
+
+      let swipes: User[] = [];
+      const response = await getDocs(swipesQuery);
+      response.forEach((doc)=> {
+        swipes.push(doc.data() as User);
+      });
+      dispatch({type: SwipesActionType.LOADED, payload: swipes});
     } catch (err: any) {
       dispatch({ type: SwipesActionType.ERROR, payload: err });
     }

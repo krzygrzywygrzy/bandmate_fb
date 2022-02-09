@@ -4,6 +4,7 @@ import { IoCloseOutline } from "react-icons/io5";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
+import { useLocation } from "wouter";
 
 type Props = {
   close?(): void;
@@ -15,13 +16,19 @@ export type Inputs = {
 };
 
 const LoginPopup: React.FC<Props> = ({ close }) => {
+  const [, setLocation] = useLocation();
+
+  const [loading, setLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const { register, handleSubmit } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
+      setLoading(true);
       await signInWithEmailAndPassword(auth, data.email, data.password);
+      setLocation("/");
       if (close) close();
     } catch (err: any) {
+      setLoading(false);
       setErrorMessage(err.message);
     }
   };
@@ -45,12 +52,12 @@ const LoginPopup: React.FC<Props> = ({ close }) => {
           />
           <input
             type="password"
-            {...register("email")}
+            {...register("password")}
             className="login-input"
             placeholder="password..."
           />
           {errorMessage && <div className="err-message">{errorMessage}</div>}
-          <button>Login</button>
+          <button>{loading ? "Loading..." : "Login"}</button>
         </form>
       </section>
     </div>
