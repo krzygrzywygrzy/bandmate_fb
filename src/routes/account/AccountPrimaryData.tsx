@@ -71,7 +71,7 @@ const AccountPrimaryData: React.FC = () => {
             <button onClick={cancelEditing} className="reset">
               Reset
             </button>
-            <button>Save</button>
+            <button>{loading ? "Loading..." : "Save"}</button>
           </div>
         )}
       </form>

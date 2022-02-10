@@ -33,6 +33,19 @@
     p {
       font-size: 1.25rem;
     }
+
+    form {
+      div {
+        input,
+        textarea {
+          width: 100%;
+        }
+
+        textarea {
+          box-sizing: border-box;
+        }
+      }
+    }
   }
 }
 
@@ -55,6 +68,9 @@ button {
 
           div {
             margin-right: 1rem;
+            input {
+              width: 350px;
+            }
           }
 
           textarea {

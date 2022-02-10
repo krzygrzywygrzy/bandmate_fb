@@ -102,6 +102,16 @@ textarea {
   font-size: 1.25rem;
 }
 
+.account-primary-data form div input,
+.account-primary-data form div textarea {
+  width: 100%;
+}
+
+.account-primary-data form div textarea {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
 button {
   padding: 0.5rem 1rem;
   background: #7c3aed;
@@ -133,6 +143,9 @@ button {
   }
   .account-primary-data form .form-inputs div {
     margin-right: 1rem;
+  }
+  .account-primary-data form .form-inputs div input {
+    width: 350px;
   }
   .account-primary-data form .form-inputs textarea {
     width: 350px;
