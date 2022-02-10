@@ -15,6 +15,10 @@
   transition: border 0.25s ease-in-out;
 }
 
+.text-input:disabled {
+  background: transparent;
+}
+
 .text-input:focus,
 textarea:focus {
   outline: none;

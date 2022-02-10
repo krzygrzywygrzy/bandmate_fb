@@ -1,3 +1,66 @@
+.container {
+  width: 90%;
+  margin: auto;
+}
+
+.text-input {
+  text-overflow: ellipsis ellipsis;
+  font-family: inherit;
+  margin-bottom: 0.5rem;
+  border: none;
+  border-bottom: 1px solid #dddddd;
+  padding: 0.5rem 1rem;
+  width: 90%;
+  -webkit-transition: border 0.25s ease-in-out;
+  transition: border 0.25s ease-in-out;
+}
+
+.text-input:disabled {
+  background: transparent;
+}
+
+.text-input:focus,
+textarea:focus {
+  outline: none;
+  border-color: black;
+}
+
+textarea {
+  font-family: inherit;
+  margin-bottom: 0.5rem;
+  border: none;
+  border: 1px solid #dddddd;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  width: 90%;
+  -webkit-transition: border 0.25s ease-in-out;
+  transition: border 0.25s ease-in-out;
+  resize: none;
+  -webkit-box-sizing: unset;
+          box-sizing: unset;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 760px;
+  }
+  .text-input {
+    width: 350px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    width: 980px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 1190px;
+  }
+}
+
 .account {
   margin-top: 1rem;
 }
@@ -12,6 +75,7 @@
   -webkit-box-align: baseline;
       -ms-flex-align: baseline;
           align-items: baseline;
+  margin-bottom: 4rem;
 }
 
 .account header .log-out {
@@ -32,5 +96,46 @@
   display: -ms-flexbox;
   display: flex;
   margin-right: 0.5rem;
+}
+
+.account-primary-data p {
+  font-size: 1.25rem;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  background: #7c3aed;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: inherit;
+  margin: auto;
+  margin-top: 1rem;
+}
+
+@media (min-width: 768px) {
+  button {
+    margin: 0;
+  }
+}
+
+.reset {
+  background: black !important;
+  margin-right: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .account-primary-data form .form-inputs {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .account-primary-data form .form-inputs div {
+    margin-right: 1rem;
+  }
+  .account-primary-data form .form-inputs textarea {
+    width: 350px;
+  }
 }
 /*# sourceMappingURL=account.css.map */

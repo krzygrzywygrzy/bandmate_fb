@@ -1,4 +1,5 @@
 @import "../../../scss/colors";
+@import "../../../scss/global";
 
 .account {
   margin-top: 1rem;
@@ -9,6 +10,7 @@
     color: $purple;
     display: flex;
     align-items: baseline;
+    margin-bottom: 4rem;
 
     .log-out {
       font-size: 1rem;
@@ -21,6 +23,44 @@
       &-icon {
         display: flex;
         margin-right: 0.5rem;
+      }
+    }
+  }
+
+  &-primary-data {
+    //border-bottom: 1px solid $gray;
+
+    p {
+      font-size: 1.25rem;
+    }
+  }
+}
+
+button {
+  @include button-mixin;
+  margin-top: 1rem;
+}
+
+.reset {
+  background: black !important;
+  margin-right: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .account {
+    &-primary-data {
+      form {
+        .form-inputs {
+          display: flex;
+
+          div {
+            margin-right: 1rem;
+          }
+
+          textarea {
+            width: 350px;
+          }
+        }
       }
     }
   }

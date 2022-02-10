@@ -5,6 +5,7 @@ import { getUser, logOut } from "../../store/thunk/userThunks";
 import "./scss/account.css";
 import { HiLogout } from "react-icons/hi";
 import { useLocation } from "wouter";
+import AccountPrimaryData from "./AccountPrimaryData";
 
 const Account: React.FC = () => {
   const [, setLocation] = useLocation();
@@ -18,14 +19,12 @@ const Account: React.FC = () => {
 
   if (user.loading) return <div className="container account">Loading...</div>;
   if (user.error)
-    return <div className="container account">Error: {user.error}</div>;
+    return <div className="container account">Error: {user.error.message}</div>;
 
   return user.data ? (
     <div className="container account">
       <header>
-        <span>
-          {user.data.name} {user.data.surname}
-        </span>
+        <span>Account</span>
         <span
           className="log-out"
           onClick={() => {
@@ -39,6 +38,7 @@ const Account: React.FC = () => {
           <span>Log out</span>
         </span>
       </header>
+      <AccountPrimaryData />
     </div>
   ) : (
     <></>

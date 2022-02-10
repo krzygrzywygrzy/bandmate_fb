@@ -3,9 +3,19 @@ import { auth, firestore } from "../../firebase";
 import { UserActionType } from "../actions/actionTypes";
 import UserAction from "../actions/userActions";
 import { RootState } from "../store";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import User from "../../models/User";
+import {
+  collection,
+  getDocs,
+  query,
+  where,
+  updateDoc,
+  doc,
+} from "firebase/firestore";
+import User, { UserPrimary } from "../../models/User";
 
+/**
+ * ThunkAction that gets current's user data
+ */
 export const getUser = (): ThunkAction<
   void,
   RootState,
@@ -37,9 +47,42 @@ export const getUser = (): ThunkAction<
   };
 };
 
+/**
+ * ThunkAction that signs user out form Firebase Auth and returns reducer to initial state
+ */
 export const logOut = (): ThunkAction<void, RootState, unknown, UserAction> => {
   return async (dispatch: ThunkDispatch<RootState, unknown, UserAction>) => {
     await auth.signOut();
     dispatch({ type: UserActionType.LOG_OUT });
+  };
+};
+
+/**
+ * ThunkAction that updates name, surname and description of user
+ * @param toUpdate
+ */
+export const updatePrimaryData = (
+  toUpdate: UserPrimary
+): ThunkAction<Promise<string>, RootState, unknown, UserAction> => {
+  return async (
+    dispatch: ThunkDispatch<RootState, unknown, UserAction>,
+    getState: () => RootState
+  ): Promise<string> => {
+    try {
+      if (!auth.currentUser) throw Error("User not logged in");
+
+      //update doc
+      const userRef = doc(firestore, "users", auth.currentUser!.uid);
+      await updateDoc(userRef, toUpdate);
+
+      const user = getState().user;
+      dispatch({
+        type: UserActionType.LOADED,
+        payload: { ...user.data!, ...toUpdate },
+      });
+      return "Operation successfull";
+    } catch (err: any) {
+      return "Error occurred! Try again later...";
+    }
   };
 };

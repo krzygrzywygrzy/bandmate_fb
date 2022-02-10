@@ -10,3 +10,9 @@ type User = {
   id: string;
 };
 export default User;
+
+export type UserPrimary = {
+  name: string;
+  surname: string;
+  description: string;
+};
