@@ -1,8 +1,13 @@
 @import "../../../scss/colors";
 
 .home {
-  margin-top: 1rem;
+  padding-top: 1rem;
   text-align: center;
+
+  &-user-display {
+    display: flex;
+    justify-content: center;
+  }
 
   &-zero-swipes {
     header {

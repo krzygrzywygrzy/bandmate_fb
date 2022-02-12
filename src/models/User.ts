@@ -8,6 +8,7 @@ type User = {
   genres: string[];
   instruments: string[];
   id: string;
+  matches: string[];
 };
 export default User;
 

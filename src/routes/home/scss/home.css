@@ -1,6 +1,15 @@
 .home {
-  margin-top: 1rem;
+  padding-top: 1rem;
   text-align: center;
+}
+
+.home-user-display {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .home-zero-swipes header {

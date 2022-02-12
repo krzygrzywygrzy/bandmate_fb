@@ -1,0 +1,29 @@
+.user-card-photos {
+  width: 100%;
+  height: calc(100vw * 0.9);
+  border-radius: 5px;
+}
+
+.user-card-photos img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 5px;
+}
+
+@media (min-width: 768px) {
+  .user-card {
+    width: 400px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .user-card-photos {
+    height: 400px;
+  }
+}
+/*# sourceMappingURL=userCard.css.map */

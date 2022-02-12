@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import UserCard from "../../components/cards/UserCard";
+import UserCard from "../../components/cards/UserCard/UserCard";
 import { RootState } from "../../store/store";
 import { loadSwipes } from "../../store/thunk/swipesThunks";
 import "./scss/home.css";
@@ -25,7 +25,7 @@ const Home: React.FC = () => {
   return swipes.data ? (
     <div className="container home">
       {swipes.data.length > 0 ? (
-        <div>
+        <div className="home-user-display">
           <UserCard user={swipes.data[0]} />
         </div>
       ) : (
