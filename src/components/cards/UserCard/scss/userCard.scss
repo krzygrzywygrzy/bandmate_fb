@@ -29,12 +29,18 @@
   }
 
   &-list {
-    display: flex;
-    flex-wrap: wrap;
+    div {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    span {
+      padding-bottom: 0.25rem;
+      font-size: 0.75rem;
+    }
   }
 
   section {
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     text-align: left;
   }
 }

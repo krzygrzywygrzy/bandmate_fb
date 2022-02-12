@@ -21,24 +21,30 @@ const UserCard: React.FC<Props> = ({ user }) => {
       </section>
       <section>{user.description}</section>
       <section className="user-card-list">
-        {user.instruments.map((instrument) => (
-          <SelectiveButton
-            isSelected={true}
-            onClick={() => {}}
-            label={instrument}
-            key={instrument}
-          />
-        ))}
+        <span>Instruments</span>
+        <div>
+          {user.instruments.map((instrument) => (
+            <SelectiveButton
+              isSelected={true}
+              onClick={() => {}}
+              label={instrument}
+              key={instrument}
+            />
+          ))}
+        </div>
       </section>
       <section className="user-card-list">
-        {user.genres.map((genre) => (
-          <SelectiveButton
-            isSelected={true}
-            onClick={() => {}}
-            label={genre}
-            key={genre}
-          />
-        ))}
+        <span>Genres</span>
+        <div>
+          {user.genres.map((genre) => (
+            <SelectiveButton
+              isSelected={true}
+              onClick={() => {}}
+              label={genre}
+              key={genre}
+            />
+          ))}
+        </div>
       </section>
       {user.spotify && isValidUrl(user.spotify) && (
         <section>
