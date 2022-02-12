@@ -25,7 +25,7 @@ export const useGetPhotoUrls = (urls: string[]) => {
     };
 
     handle();
-  }, []);
+  }, [urls]);
 
   return { data, loading, error };
 };
