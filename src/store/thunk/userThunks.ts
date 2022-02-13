@@ -1,17 +1,11 @@
-import { ThunkAction, ThunkDispatch } from "redux-thunk";
-import { auth, firestore } from "../../firebase";
-import { UserActionType } from "../actions/actionTypes";
+import {ThunkAction, ThunkDispatch} from "redux-thunk";
+import {auth, firestore} from "../../firebase";
+import {UserActionType} from "../actions/actionTypes";
 import UserAction from "../actions/userActions";
-import { RootState } from "../store";
-import {
-  collection,
-  getDocs,
-  query,
-  where,
-  updateDoc,
-  doc,
-} from "firebase/firestore";
-import User, { UserPrimary } from "../../models/User";
+import {RootState} from "../store";
+import {collection, doc, getDocs, query, updateDoc, where,} from "firebase/firestore";
+import User, {UserPrimary} from "../../models/User";
+import {ThunkMessages} from "../../core/exports";
 
 /**
  * ThunkAction that gets current's user data
@@ -63,11 +57,11 @@ export const logOut = (): ThunkAction<void, RootState, unknown, UserAction> => {
  */
 export const updatePrimaryData = (
   toUpdate: UserPrimary
-): ThunkAction<Promise<string>, RootState, unknown, UserAction> => {
+): ThunkAction<Promise<ThunkMessages>, RootState, unknown, UserAction> => {
   return async (
     dispatch: ThunkDispatch<RootState, unknown, UserAction>,
     getState: () => RootState
-  ): Promise<string> => {
+  ): Promise<ThunkMessages> => {
     try {
       if (!auth.currentUser) throw Error("User not logged in");
 
@@ -80,9 +74,9 @@ export const updatePrimaryData = (
         type: UserActionType.LOADED,
         payload: { ...user.data!, ...toUpdate },
       });
-      return "Operation successfull";
+      return ThunkMessages.SUCCESS;
     } catch (err: any) {
-      return "Error occurred! Try again later...";
+      return ThunkMessages.ERROR;
     }
   };
 };

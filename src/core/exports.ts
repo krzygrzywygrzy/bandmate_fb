@@ -7,3 +7,8 @@ export const instrumentsToSelect = [
   "Singing",
   "Ukulele",
 ];
+
+export enum ThunkMessages  {
+  SUCCESS = "success",
+  ERROR = "error",
+}

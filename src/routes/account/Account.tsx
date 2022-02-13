@@ -39,6 +39,7 @@ const Account: React.FC = () => {
         </span>
       </header>
       <AccountPrimaryData />
+
     </div>
   ) : (
     <></>

@@ -11,7 +11,6 @@
   border-bottom: 1px solid #dddddd;
   padding: 0.5rem 1rem;
   width: 90%;
-  -webkit-transition: border 0.25s ease-in-out;
   transition: border 0.25s ease-in-out;
 }
 
@@ -33,50 +32,43 @@ textarea {
   border-radius: 5px;
   padding: 0.5rem 1rem;
   width: 90%;
-  -webkit-transition: border 0.25s ease-in-out;
   transition: border 0.25s ease-in-out;
   resize: none;
-  -webkit-box-sizing: unset;
-          box-sizing: unset;
+  box-sizing: unset;
 }
 
 @media (min-width: 768px) {
   .container {
     width: 760px;
   }
+
   .text-input {
     width: 350px;
   }
 }
-
 @media (min-width: 992px) {
   .container {
     width: 980px;
   }
 }
-
 @media (min-width: 1200px) {
   .container {
     width: 1190px;
   }
 }
-
 .welcome header {
   margin: 5rem 0 2rem 0;
 }
-
 .welcome header .title {
   font-size: 3rem;
   font-weight: 600;
   text-align: center;
 }
-
 .welcome header .sub-title {
   font-size: 1rem;
   font-weight: 400;
   text-align: center;
 }
-
 .welcome .join button {
   padding: 0.5rem 1rem;
   background: #7c3aed;
@@ -89,7 +81,6 @@ textarea {
   font-size: 1.25rem;
   width: 100%;
 }
-
 @media (min-width: 768px) {
   .welcome .join button {
     margin: 0;
@@ -110,4 +101,5 @@ textarea {
     width: 350px;
   }
 }
+
 /*# sourceMappingURL=welcome.css.map */

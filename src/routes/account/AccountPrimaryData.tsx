@@ -5,6 +5,7 @@ import { UserPrimary } from "../../models/User";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { updatePrimaryData } from "../../store/thunk/userThunks";
+import {ThunkMessages} from "../../core/exports";
 
 const AccountPrimaryData: React.FC = () => {
   const [disabled, setDisabled] = useState<boolean>(true);
@@ -20,10 +21,18 @@ const AccountPrimaryData: React.FC = () => {
   });
 
   const [loading, setLoading] = useState<boolean>(false);
+  const [message, setMessage] = useState<string| null>(null);
   const onSubmit: SubmitHandler<UserPrimary> = async (data) => {
     setLoading(true);
-    const res = await dispatch(updatePrimaryData(data));
-    console.log(res);
+    const res: any = await dispatch(updatePrimaryData(data));
+    console.log("response", res);
+    if(res === ThunkMessages.SUCCESS) {
+      setDisabled(true);
+      setMessage("Your data has been updated!");
+    } else {
+      setMessage("An error occurred! Your data ");
+    }
+
     setLoading(false);
   };
 
@@ -50,21 +59,21 @@ const AccountPrimaryData: React.FC = () => {
               className="text-input"
               placeholder="name..."
               {...register("name")}
-            ></input>
+            />
             <br />
             <input
               disabled={disabled}
               className="text-input"
               placeholder="surname..."
               {...register("surname")}
-            ></input>
+            />
           </div>
           <textarea
             {...register("description")}
             rows={10}
             placeholder="description..."
             disabled={disabled}
-          ></textarea>
+          />
         </div>
         {!disabled && (
           <div>
@@ -76,6 +85,7 @@ const AccountPrimaryData: React.FC = () => {
         )}
       </form>
       {disabled && <button onClick={() => setDisabled(false)}>Edit</button>}
+      {message && <div className="message">{message}</div>}
     </section>
   );
 };

@@ -11,7 +11,6 @@
   border-bottom: 1px solid #dddddd;
   padding: 0.5rem 1rem;
   width: 90%;
-  -webkit-transition: border 0.25s ease-in-out;
   transition: border 0.25s ease-in-out;
 }
 
@@ -33,83 +32,66 @@ textarea {
   border-radius: 5px;
   padding: 0.5rem 1rem;
   width: 90%;
-  -webkit-transition: border 0.25s ease-in-out;
   transition: border 0.25s ease-in-out;
   resize: none;
-  -webkit-box-sizing: unset;
-          box-sizing: unset;
+  box-sizing: unset;
 }
 
 @media (min-width: 768px) {
   .container {
     width: 760px;
   }
+
   .text-input {
     width: 350px;
   }
 }
-
 @media (min-width: 992px) {
   .container {
     width: 980px;
   }
 }
-
 @media (min-width: 1200px) {
   .container {
     width: 1190px;
   }
 }
-
 .account {
   margin-top: 1rem;
 }
-
 .account header {
   font-size: 1.5rem;
   font-weight: 600;
   color: #7c3aed;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: baseline;
-      -ms-flex-align: baseline;
-          align-items: baseline;
+  align-items: baseline;
   margin-bottom: 4rem;
 }
-
 .account header .log-out {
   font-size: 1rem;
   color: black;
   margin-left: 2rem;
   cursor: pointer;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: baseline;
-      -ms-flex-align: baseline;
-          align-items: baseline;
+  align-items: baseline;
 }
-
 .account header .log-out-icon {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   margin-right: 0.5rem;
 }
-
 .account-primary-data p {
   font-size: 1.25rem;
 }
-
 .account-primary-data form div input,
 .account-primary-data form div textarea {
   width: 100%;
 }
-
 .account-primary-data form div textarea {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
+}
+.account-primary-data .message {
+  margin-top: 0.5rem;
+  color: #7c3aed;
 }
 
 button {
@@ -123,7 +105,6 @@ button {
   margin: auto;
   margin-top: 1rem;
 }
-
 @media (min-width: 768px) {
   button {
     margin: 0;
@@ -137,8 +118,6 @@ button {
 
 @media (min-width: 768px) {
   .account-primary-data form .form-inputs {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
   }
   .account-primary-data form .form-inputs div {
@@ -151,4 +130,5 @@ button {
     width: 350px;
   }
 }
+
 /*# sourceMappingURL=account.css.map */

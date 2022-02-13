@@ -1,42 +1,45 @@
-import { ThunkAction, ThunkDispatch } from "redux-thunk";
-import { SwipesActionType, UserActionType } from "../actions/actionTypes";
+import {ThunkAction, ThunkDispatch} from "redux-thunk";
+import {SwipesActionType, UserActionType} from "../actions/actionTypes";
 import SwipesAction from "../actions/swipesActions";
 import UserAction from "../actions/userActions";
-import { RootState } from "../store";
-import { writeBatch, doc, updateDoc } from "firebase/firestore";
-import { firestore } from "../../firebase";
+import {RootState} from "../store";
+import {doc, updateDoc, writeBatch} from "firebase/firestore";
+import {firestore} from "../../firebase";
+import {ThunkMessages} from "../../core/exports";
 
 export const likeOrMatch = (
   liked: boolean
-): ThunkAction<void, RootState, unknown, UserAction | SwipesAction> => {
+): ThunkAction<Promise<ThunkMessages>, RootState, unknown, UserAction | SwipesAction> => {
   return async (
     dispatch: ThunkDispatch<RootState, unknown, UserAction | SwipesAction>,
     getState: () => RootState
-  ) => {
-    try {
-      if (!getState().swipes.data)
-        throw Error("No more musicians to swipe on left!");
+  ): Promise<ThunkMessages> => {
+      try {
+
+        throw Error();
+        if (!getState().swipes.data)
+          throw Error("No more musicians to swipe on left!");
 
       if (liked) {
-        const you = getState().user;
-        if (!you.data) throw Error("User not logged in!");
+        const you = getState().user.data!;
+        if (!you) throw Error("User not logged in!");
         const swipe = getState().swipes.data![0];
-        if (swipe.likes.includes(you.data!.id)) {
+        if (swipe.likes.includes(you.id)) {
           //match
           const batch = writeBatch(firestore);
 
           //create new match document
           const matchDoc = doc(firestore, "matches");
           batch.set(matchDoc, {
-            users: [you.data.id, swipe.id],
+            users: [you.id, swipe.id],
           });
 
           //update yours data
           const toUpdate = {
-            likes: [...you.data.likes, swipe.id],
-            matches: [...you.data.matches, matchDoc.id],
+            likes: [...you.likes, swipe.id],
+            matches: [...you.matches, matchDoc.id],
           };
-          batch.update(doc(firestore, "users", you.data.id), toUpdate);
+          batch.update(doc(firestore, "users", you.id), toUpdate);
 
           //update swipe's data
           batch.update(doc(firestore, "users", swipe.id), {
@@ -47,12 +50,14 @@ export const likeOrMatch = (
 
           dispatch({
             type: UserActionType.LOADED,
-            payload: { ...you.data, ...toUpdate },
+            payload: { ...you, ...toUpdate },
           });
+
+
         } else {
           //add swipe to your likes
-          await updateDoc(doc(firestore, "users", you.data.id), {
-            likes: [...you.data.likes, swipe.id],
+          await updateDoc(doc(firestore, "users", you.id), {
+            likes: [...you.likes, swipe.id],
           });
         }
       }
@@ -62,6 +67,9 @@ export const likeOrMatch = (
         type: SwipesActionType.LOADED,
         payload: getState().swipes.data!.slice(1),
       });
-    } catch (err) {}
+      return ThunkMessages.SUCCESS;
+    } catch (err) {
+      return ThunkMessages.ERROR;
+    }
   };
 };
