@@ -6,21 +6,31 @@ import SelectiveButton from "../../input/SelectiveButton";
 import isValidUrl from "../../../core/isValidUrl";
 import Spotify from "react-spotify-embed";
 import { FiThumbsDown, FiThumbsUp } from "react-icons/fi";
+import { useDispatch } from "react-redux";
+import { likeOrMatch } from "../../../store/thunk/matchesThunks";
 
 type Props = {
   user: User;
 };
 
 const UserCard: React.FC<Props> = ({ user }) => {
+  const dispatch = useDispatch();
+
   return (
     <div className="user-card">
       <UserCardPhotos photos={user.photoUrls} />
       <section className="like-dislike">
-        <div className="like-dislike-button ">
+        <div
+          className="like-dislike-button"
+          onClick={() => dispatch(likeOrMatch(true))}
+        >
           <FiThumbsUp size={24} />
           <span>like</span>
         </div>
-        <div className="like-dislike-button">
+        <div
+          className="like-dislike-button"
+          onClick={() => dispatch(likeOrMatch(false))}
+        >
           <FiThumbsDown size={24} />
           <span>dislike</span>
         </div>
