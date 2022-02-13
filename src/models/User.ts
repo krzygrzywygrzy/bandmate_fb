@@ -9,6 +9,7 @@ type User = {
   instruments: string[];
   id: string;
   matches: string[];
+  likes: string[];
 };
 export default User;
 

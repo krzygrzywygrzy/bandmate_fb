@@ -63,6 +63,7 @@ const Join: React.FC = () => {
         genres,
         photoUrls: urls,
         matches: [],
+        likes: [],
       };
       await setDoc(doc(firestore, "/users", credential.user.uid), user);
 

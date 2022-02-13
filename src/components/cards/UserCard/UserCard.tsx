@@ -12,8 +12,6 @@ type Props = {
 };
 
 const UserCard: React.FC<Props> = ({ user }) => {
-  console.log(user);
-
   return (
     <div className="user-card">
       <UserCardPhotos photos={user.photoUrls} />
