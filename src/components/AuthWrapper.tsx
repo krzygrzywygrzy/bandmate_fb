@@ -25,7 +25,7 @@ const AuthWrapper: React.FC = ({children}) => {
             }
             else goHome();
         })
-    }, [goHome]);
+    }, [goHome, dispatch, state.chats.data, state.user.data]);
 
     return state.user.data && state.chats.data ? <div>{children}</div> : <></>;
 }
