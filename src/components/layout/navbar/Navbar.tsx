@@ -39,7 +39,7 @@ const Navbar: React.FC = () => {
           </div>
         ) : (
           <div className="auth">
-            <div className="auth-icon" onClick={() => setLocation("/")}>
+            <div className="auth-icon" onClick={() => setLocation("/swipe")}>
               <HiUserGroup size={24} />
             </div>
             <div className="auth-icon" onClick={() => setLocation("/messages")}>

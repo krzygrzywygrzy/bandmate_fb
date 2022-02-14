@@ -1,14 +1,30 @@
 import React from "react";
+import useGetPhotoUrl from "../../../core/useGetPhotoUrl";
+import "./scss/userChatCard.css";
 
 type Props = {
   displayName: string;
   lastMessage: string;
-  image: string;
+  image: string[];
 }
 
 const UserChatCard: React.FC<Props> = (
     {displayName, lastMessage, image}) => {
-  return <div className="container"></div>
+  const {data} = useGetPhotoUrl(image);
+
+
+  return <div className="user-chat-card">
+    <div>
+      {data && data.length > 0 ? <div>
+        <img src={data[0]} />
+      </div>: <div>
+        no img
+      </div>}
+    </div>
+    <div>
+      <span>{displayName}</span>
+    </div>
+  </div>
 }
 
 export default UserChatCard;

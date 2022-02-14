@@ -69,7 +69,7 @@ const Join: React.FC = () => {
 
       //dispatch user to store
       dispatch({ type: UserActionType.LOADED, payload: user });
-      setLocation("/");
+      setLocation("/swipe");
     } catch (err: any) {
       setMessage(err.message);
       setLoading(false);

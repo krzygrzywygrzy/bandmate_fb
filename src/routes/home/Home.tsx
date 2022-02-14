@@ -8,14 +8,12 @@ import "./scss/home.css";
 
 const Home: React.FC = () => {
   const swipes = useSelector((state: RootState) => state.swipes);
-  const user = useSelector((state: RootState) => state.swipes);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadSwipes());
-    if (!user.data) dispatch(getUser());
   }, [dispatch]);
 
-  if (swipes.loading || user.loading) {
+  if (swipes.loading) {
     return <div className="container home">Loading...</div>;
   }
 
@@ -25,7 +23,7 @@ const Home: React.FC = () => {
     );
   }
 
-  return swipes.data && user.data ? (
+  return swipes.data  ? (
     <div className="container home">
       {swipes.data.length > 0 ? (
         <div className="home-user-display">

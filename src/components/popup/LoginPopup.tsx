@@ -25,7 +25,7 @@ const LoginPopup: React.FC<Props> = ({ close }) => {
     try {
       setLoading(true);
       await signInWithEmailAndPassword(auth, data.email, data.password);
-      setLocation("/");
+      setLocation("/swipe");
       if (close) close();
     } catch (err: any) {
       setLoading(false);
