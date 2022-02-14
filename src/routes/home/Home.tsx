@@ -13,7 +13,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     dispatch(loadSwipes());
     if (!user.data) dispatch(getUser());
-  }, []);
+  }, [dispatch]);
 
   if (swipes.loading || user.loading) {
     return <div className="container home">Loading...</div>;

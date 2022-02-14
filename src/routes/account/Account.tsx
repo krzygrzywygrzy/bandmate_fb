@@ -15,7 +15,7 @@ const Account: React.FC = () => {
     if (!user.data) {
       dispatch(getUser());
     }
-  }, []);
+  }, [user.data, dispatch]);
 
   if (user.loading) return <div className="container account">Loading...</div>;
   if (user.error)

@@ -15,8 +15,6 @@ export const likeOrMatch = (
     getState: () => RootState
   ): Promise<ThunkMessages> => {
       try {
-
-        throw Error();
         if (!getState().swipes.data)
           throw Error("No more musicians to swipe on left!");
 
