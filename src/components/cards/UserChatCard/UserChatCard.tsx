@@ -12,11 +12,10 @@ const UserChatCard: React.FC<Props> = (
     {displayName, lastMessage, image}) => {
   const {data} = useGetPhotoUrl(image);
 
-
   return <div className="user-chat-card">
-    <div>
+    <div className="user-chat-card-avatar">
       {data && data.length > 0 ? <div>
-        <img src={data[0]} />
+        <img src={data[0]} alt="" />
       </div>: <div>
         no img
       </div>}

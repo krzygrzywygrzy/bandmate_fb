@@ -1,3 +1,16 @@
 .user-chat-card {
+  display: flex;
+  align-items: center;
 
+  &-avatar {
+    height: 50px;
+    width: 50px;
+
+    img {
+      height: 100%;
+      width: 100%;
+      border-radius: 100%;
+    }
+  }
 }
+

@@ -23,7 +23,7 @@ const Welcome: React.FC = () => {
           <span className="sub-title">best place to meet fellow musicians</span>
         </header>
         <section className="join">
-          <button className="button" onClick={() => setLocation("/join")}>
+          <button className="button" onClick={() => setLocation(loggedIn ? "/join": "/swipe")}>
             {loggedIn ? "Go to dashboard": "Join"}
           </button>
         </section>
