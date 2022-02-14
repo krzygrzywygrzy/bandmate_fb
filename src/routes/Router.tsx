@@ -12,6 +12,7 @@ import Account from "./account/Account";
 import {collection, onSnapshot, query, where} from "firebase/firestore";
 import {getUser} from "../store/thunk/userThunks";
 import {loadChats} from "../store/thunk/chatThunks";
+import Messages from "./messages/Messages";
 
 const Router: React.FC = () => {
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
@@ -24,13 +25,12 @@ const Router: React.FC = () => {
       if (user) {
         setLoggedIn(true);
         if(!storedUser.data) dispatch(getUser());
-        if(!storedChat.data) dispatch(loadChats());
+        //if(!storedChat.data) dispatch(loadChats());
       } else {
         setLoggedIn(false);
       }
     });
-    chatsUpdates();
-  }, [storedUser,]);
+  }, []);
 
   const chatsUpdates = async (): Promise<void> => {
     if (storedUser.data && storedChat.data) {
@@ -54,6 +54,9 @@ const Router: React.FC = () => {
           </Route>
           <Route path="/account">
             <Account/>
+          </Route>
+          <Route path="/messages">
+            <Messages />
           </Route>
         </WouterRouter>
       </div>

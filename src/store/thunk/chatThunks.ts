@@ -2,8 +2,11 @@ import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {RootState} from "../store";
 import ChatActions from "../actions/chatActions";
 import {ChatActionType} from "../actions/actionTypes";
-import {collection, query, where, getDocs} from "firebase/firestore";
+import {collection, doc, getDoc, getDocs, query, where} from "firebase/firestore";
 import {firestore} from "../../firebase";
+import Match from "../../models/Match";
+import chat from "../../models/Chat";
+import User from "../../models/User";
 
 export const loadChats = ():
     ThunkAction<void, RootState, unknown, ChatActions> => {
@@ -19,14 +22,23 @@ export const loadChats = ():
 
       const matchesQuery = query(
           collection(firestore, "matches"),
-          where("id", "in", user.matches),);
+          where("id", "in", user.matches));
+
+      let chats: chat[] = [];
       const matchesSnapshots = await getDocs(matchesQuery);
-      matchesSnapshots.forEach((match)=> {
-        //TODO: get data of user
-      })
-
-
-
+      for(let match of matchesSnapshots.docs) {
+        const data = match.data() as Match;
+        const swipeId: string = data.users.filter((el)=> el!== user.id)[0];
+        const user = await getDoc(doc(firestore, "users", swipeId));
+        chats.push(
+            {
+              messages: data.chatMessages,
+              user: user.data() as User,
+              id: match.id,
+            }
+        );
+      }
+      dispatch({type: ChatActionType.LOADED, payload: chats});
     } catch (err: any) {
       dispatch({type: ChatActionType.ERROR, payload: err});
     }
