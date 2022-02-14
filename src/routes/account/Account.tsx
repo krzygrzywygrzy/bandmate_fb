@@ -6,6 +6,7 @@ import "./scss/account.css";
 import { HiLogout } from "react-icons/hi";
 import { useLocation } from "wouter";
 import AccountPrimaryData from "./AccountPrimaryData";
+import AuthWrapper from "../../components/AuthWrapper";
 
 const Account: React.FC = () => {
   const [, setLocation] = useLocation();
@@ -22,25 +23,27 @@ const Account: React.FC = () => {
     return <div className="container account">Error: {user.error.message}</div>;
 
   return user.data ? (
-    <div className="container account">
-      <header>
-        <span>Account</span>
-        <span
-          className="log-out"
-          onClick={() => {
-            dispatch(logOut());
-            setLocation("/");
-          }}
-        >
-          <span className="log-out-icon">
-            <HiLogout />
-          </span>{" "}
-          <span>Log out</span>
-        </span>
-      </header>
-      <AccountPrimaryData />
+      <AuthWrapper>
+        <div className="container account">
+          <header>
+            <span>Account</span>
+            <span
+              className="log-out"
+              onClick={() => {
+                dispatch(logOut());
+                setLocation("/");
+              }}
+            >
+              <span className="log-out-icon">
+                <HiLogout />
+              </span>{" "}
+              <span>Log out</span>
+            </span>
+          </header>
+          <AccountPrimaryData />
 
-    </div>
+        </div>
+      </AuthWrapper>
   ) : (
     <></>
   );
