@@ -28,18 +28,21 @@ export const loadChats = ():
       const matchesSnapshots = await getDocs(matchesQuery);
       for(let match of matchesSnapshots.docs) {
         const data = match.data() as Match;
+
+        //get data of swipe
         const swipeId: string = data.users.filter((el)=> el!== user.id)[0];
-        const user = await getDoc(doc(firestore, "users", swipeId));
+        const swipe = await getDoc(doc(firestore, "users", swipeId));
         chats.push(
             {
               messages: data.chatMessages,
-              user: user.data() as User,
+              user: swipe.data() as User,
               id: match.id,
             }
         );
       }
       dispatch({type: ChatActionType.LOADED, payload: chats});
     } catch (err: any) {
+      console.log(err);
       dispatch({type: ChatActionType.ERROR, payload: err});
     }
   }

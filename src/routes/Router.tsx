@@ -21,11 +21,11 @@ const Router: React.FC = () => {
   const storedChat = useSelector((state: RootState) => state.chats)
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth,  async (user) => {
       if (user) {
         setLoggedIn(true);
-        if(!storedUser.data) dispatch(getUser());
-        //if(!storedChat.data) dispatch(loadChats());
+        if(!storedUser.data) await dispatch(getUser());
+        if(!storedChat.data) dispatch(loadChats());
       } else {
         setLoggedIn(false);
       }
