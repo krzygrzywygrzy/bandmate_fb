@@ -10,3 +10,9 @@ export enum SwipesActionType {
   LOADED = "swipes_loaded",
   ERROR = "swipes_error",
 }
+
+export enum ChatActionType {
+  LOAD = "chat_load",
+  LOADED = "chat_loaded",
+  ERROR = "chat_error",
+}

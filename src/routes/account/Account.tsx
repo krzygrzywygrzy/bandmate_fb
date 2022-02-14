@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../store/store";
-import { getUser, logOut } from "../../store/thunk/userThunks";
+import React, {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../../store/store";
+import {getUser, logOut} from "../../store/thunk/userThunks";
 import "./scss/account.css";
-import { HiLogout } from "react-icons/hi";
-import { useLocation } from "wouter";
+import {HiLogout} from "react-icons/hi";
+import {useLocation} from "wouter";
 import AccountPrimaryData from "./AccountPrimaryData";
 import AuthWrapper from "../../components/AuthWrapper";
 
@@ -28,24 +28,24 @@ const Account: React.FC = () => {
           <header>
             <span>Account</span>
             <span
-              className="log-out"
-              onClick={() => {
-                dispatch(logOut());
-                setLocation("/");
-              }}
+                className="log-out"
+                onClick={() => {
+                  dispatch(logOut());
+                  setLocation("/");
+                }}
             >
               <span className="log-out-icon">
-                <HiLogout />
+                <HiLogout/>
               </span>{" "}
               <span>Log out</span>
             </span>
           </header>
-          <AccountPrimaryData />
+          <AccountPrimaryData/>
 
         </div>
       </AuthWrapper>
   ) : (
-    <></>
+      <></>
   );
 };
 

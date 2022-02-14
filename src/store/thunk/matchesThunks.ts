@@ -10,65 +10,66 @@ import {ThunkMessages} from "../../core/exports";
 export const likeOrMatch = (
     liked: boolean
 ): ThunkAction<Promise<ThunkMessages>, RootState, unknown, UserAction | SwipesAction> => {
-    return async (
-        dispatch: ThunkDispatch<RootState, unknown, UserAction | SwipesAction>,
-        getState: () => RootState
-    ): Promise<ThunkMessages> => {
-        try {
-            if (!getState().swipes.data)
-                throw Error("No more musicians to swipe on left!");
+  return async (
+      dispatch: ThunkDispatch<RootState, unknown, UserAction | SwipesAction>,
+      getState: () => RootState
+  ): Promise<ThunkMessages> => {
+    try {
+      if (!getState().swipes.data)
+        throw Error("No more musicians to swipe on left!");
 
-            if (liked) {
-                const you = getState().user.data!;
-                if (!you) throw Error("User not logged in!");
-                const swipe = getState().swipes.data![0];
-                if (swipe.likes.includes(you.id)) {
-                    //match
-                    const batch = writeBatch(firestore);
+      if (liked) {
+        const you = getState().user.data!;
 
-                    //create new match document with chat collection
-                    const matchDoc = doc(firestore, "matches", `${you.id}_${swipe.id}`);
-                    batch.set(matchDoc, {
-                        users: [you.id, swipe.id],
-                    });
-                    const chatColl = collection(firestore, matchDoc.path + "/chat");
-                    let res = await addDoc(chatColl, {});
+        if (!you) throw Error("User not logged in!");
 
-                    //update yours data
-                    const toUpdate = {
-                        likes: [...you.likes, swipe.id],
-                        matches: [...you.matches, matchDoc.id],
-                    };
-                    batch.update(doc(firestore, "users", you.id), toUpdate);
+        const swipe = getState().swipes.data![0];
+        if (swipe.likes.includes(you.id)) {
+          //match
+          const batch = writeBatch(firestore);
 
-                    //update swipe's data
-                    batch.update(doc(firestore, "users", swipe.id), {
-                        matches: [...swipe.matches, matchDoc.id],
-                    });
+          //create new match document with chat collection
+          const matchDoc = doc(firestore, "matches", `${you.id}_${swipe.id}`);
+          batch.set(matchDoc, {
+            users: [you.id, swipe.id],
+          });
+          const chatColl = collection(firestore, matchDoc.path + "/chat");
+          await addDoc(chatColl, {});
 
-                    await batch.commit();
+          //update yours data
+          const toUpdate = {
+            likes: [...you.likes, swipe.id],
+            matches: [...you.matches, matchDoc.id],
+          };
+          batch.update(doc(firestore, "users", you.id), toUpdate);
 
-                    dispatch({
-                        type: UserActionType.LOADED,
-                        payload: {...you, ...toUpdate},
-                    });
-                } else {
-                    //add swipe to your likes
-                    await updateDoc(doc(firestore, "users", you.id), {
-                        likes: [...you.likes, swipe.id],
-                    });
-                }
-            }
+          //update swipe's data
+          batch.update(doc(firestore, "users", swipe.id), {
+            matches: [...swipe.matches, matchDoc.id],
+          });
 
-            //in the end just remove first user from array
-            dispatch({
-                type: SwipesActionType.LOADED,
-                payload: getState().swipes.data!.slice(1),
-            });
-            return ThunkMessages.SUCCESS;
-        } catch (err) {
-            console.log(err);
-            return ThunkMessages.ERROR;
+          await batch.commit();
+
+          dispatch({
+            type: UserActionType.LOADED,
+            payload: {...you, ...toUpdate},
+          });
+        } else {
+          //add swipe to your likes
+          await updateDoc(doc(firestore, "users", you.id), {
+            likes: [...you.likes, swipe.id],
+          });
         }
-    };
+      }
+
+      //in the end just remove first user from array
+      dispatch({
+        type: SwipesActionType.LOADED,
+        payload: getState().swipes.data!.slice(1),
+      });
+      return ThunkMessages.SUCCESS;
+    } catch (err) {
+      return ThunkMessages.ERROR;
+    }
+  };
 };
