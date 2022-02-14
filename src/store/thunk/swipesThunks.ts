@@ -22,15 +22,12 @@ export const loadSwipes = (): ThunkAction<void,
 
             const usersRef = collection(firestore, "users");
 
-            //TODO: check why gets liked people
             const swipesQuery = query(usersRef, where(
-                "id", "!=", [currentUser.uid, ...getState().user.data?.likes ?? []]));
+                "id", "not-in", [currentUser.uid, ...getState().user.data?.likes ?? []]));
 
             let swipes: User[] = [];
             const response = await getDocs(swipesQuery);
             response.forEach((doc) => {
-                //temporary if, because where in query does not work properly
-                if (![currentUser.uid, ...getState().user.data?.likes ?? []].includes(doc.id))
                     swipes.push(doc.data() as User);
             });
             dispatch({type: SwipesActionType.LOADED, payload: swipes});

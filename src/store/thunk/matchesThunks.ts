@@ -18,6 +18,7 @@ export const likeOrMatch = (
       if (!getState().swipes.data)
         throw Error("No more musicians to swipe on left!");
 
+
       if (liked) {
         const you = getState().user.data!;
 
@@ -32,9 +33,9 @@ export const likeOrMatch = (
           const matchDoc = doc(firestore, "matches", `${you.id}_${swipe.id}`);
           batch.set(matchDoc, {
             users: [you.id, swipe.id],
+            chatMessages: [],
+            id: `${you.id}_${swipe.id}`,
           });
-          const chatColl = collection(firestore, matchDoc.path + "/chat");
-          await addDoc(chatColl, {});
 
           //update yours data
           const toUpdate = {
