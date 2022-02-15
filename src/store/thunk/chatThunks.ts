@@ -34,7 +34,7 @@ export const loadChats = ():
         const swipe = await getDoc(doc(firestore, "users", swipeId));
         chats.push(
             {
-              messages: data.chatMessages,
+              lastMessage: data.lastMessage,
               user: swipe.data() as User,
               id: match.id,
             }

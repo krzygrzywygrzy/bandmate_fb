@@ -1,7 +1,7 @@
 import Message from "./Message";
 
 type Match = {
-  chatMessages: Message[],
+  lastMessage?: Message,
   id: string;
   users: string[],
 }

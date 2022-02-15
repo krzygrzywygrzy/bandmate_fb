@@ -3,7 +3,7 @@ import Message from "./Message";
 
 type Chat = {
   user: User;
-  messages: Message[];
+  lastMessage?: Message;
   id: string;
 };
 

@@ -16,3 +16,9 @@ export enum ChatActionType {
   LOADED = "chat_loaded",
   ERROR = "chat_error",
 }
+
+export enum MessagesActionType {
+  LOAD = "messages_load",
+  LOADED = "messages_loaded",
+  ERROR = "messages_error",
+}
