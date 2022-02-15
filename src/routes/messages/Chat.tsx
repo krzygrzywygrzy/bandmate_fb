@@ -1,8 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 import {useSelector} from "react-redux";
 import {RootState} from "../../store/store";
 import "./scss/messages.css";
-import { FiSend} from "react-icons/fi";
+import {FiSend} from "react-icons/fi";
 
 type Props = {
   id: string;
@@ -11,7 +11,7 @@ type Props = {
 const Chat: React.FC<Props> = ({id}) => {
   const chat = useSelector(
       (state: RootState) =>
-          state.chats.data!.filter((chat)=> chat.id === id)[0]);
+          state.chats.data!.filter((chat) => chat.id === id)[0]);
 
   return <div className="chat">
     <header>{chat.user.name} {chat.user.surname}</header>
@@ -19,7 +19,8 @@ const Chat: React.FC<Props> = ({id}) => {
       messages
     </section>
     <section className="chat-input">
-      <input placeholder="type something..."/><div><FiSend size={24} /></div>
+      <input placeholder="type something..."/>
+      <div><FiSend size={24}/></div>
     </section>
   </div>;
 }

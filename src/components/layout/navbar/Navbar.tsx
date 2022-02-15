@@ -5,8 +5,8 @@ import Popup from "../../popup/Popup";
 import "./navbar.css";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../../firebase";
-import { HiUserGroup, HiUserCircle, HiPaperAirplane } from "react-icons/hi";
 import { useLocation } from "wouter";
+import {FiMessageCircle, FiUser, FiTarget} from "react-icons/fi";
 
 const Navbar: React.FC = () => {
   const [, setLocation] = useLocation();
@@ -40,13 +40,13 @@ const Navbar: React.FC = () => {
         ) : (
           <div className="auth">
             <div className="auth-icon" onClick={() => setLocation("/swipe")}>
-              <HiUserGroup size={24} />
+              <FiTarget size={24} />
             </div>
             <div className="auth-icon" onClick={() => setLocation("/messages")}>
-              <HiPaperAirplane size={24} />
+              <FiMessageCircle size={24} />
             </div>
             <div className="auth-icon" onClick={() => setLocation("/account")}>
-              <HiUserCircle size={24} />
+              <FiUser size={24} />
             </div>
           </div>
         )}
