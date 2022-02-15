@@ -17,7 +17,7 @@ const UserChatCard: React.FC<Props> = (
       {data && data.length > 0 ? <div>
         <img src={data[0]} alt="" className={data && "user-chat-card-avatar-border"} />
       </div>: <div className="user-chat-card-avatar">
-        no img
+        {""}
       </div>}
     </div>
     <div className="user-chat-card-info">
