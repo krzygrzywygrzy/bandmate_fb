@@ -3,8 +3,15 @@ import {useSelector} from "react-redux";
 import {RootState} from "../../store/store";
 import "./scss/messages.css";
 import UserChatCard from "../../components/cards/UserChatCard/UserChatCard";
+import {useLocation} from "wouter";
+import Chat from "./Chat";
 
-const Messages: React.FC = () => {
+type Props = {
+  id?: string;
+}
+
+const Messages: React.FC<Props> = ({id}) => {
+  const [, setLocation] = useLocation();
   const chats = useSelector((state: RootState) => state.chats);
 
   if (chats.loading) return <div className="container">Loading...</div>
@@ -13,15 +20,18 @@ const Messages: React.FC = () => {
   return chats.data ?
       <div className="container messages">
         {chats.data.length > 0 ? <div className="messages-list">
-
           {chats.data.map((chat) => {
-            return <UserChatCard
-                key={chat.id}
+            return <div key={chat.id} onClick={() => setLocation(`/messages/${chat.id}`)}><UserChatCard
                 displayName={`${chat.user.name} ${chat.user.surname}`}
                 lastMessage={"No messages yet!"}
-                image={chat.user.photoUrls}/>
+                image={chat.user.photoUrls}/></div>
           })}
-        </div> : <div></div>}
+        </div> : <div className="messages-list">
+          No users to message yet!
+        </div>}
+        <div className="messages-chat-container">{id ? <Chat id={id}/> : <div className="empty-chat">
+          Select chat to see messages...
+        </div>}</div>
       </div>
       : <></>
 }

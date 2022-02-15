@@ -1,5 +1,4 @@
-import React, {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import React from "react";
 import {Route, Router as WouterRouter} from "wouter";
 import Navbar from "../components/layout/navbar/Navbar";
 import Join from "./auth/Join";
@@ -28,6 +27,9 @@ const Router: React.FC = () => {
           </Route>
           <Route path="/messages">
             <AuthWrapper><Messages/></AuthWrapper>
+          </Route>
+          <Route path="/messages/:id">
+            {(params) => <Messages id={params.id} />}
           </Route>
         </WouterRouter>
       </div>

@@ -19,13 +19,13 @@ const AuthWrapper: React.FC = ({children}) => {
         onAuthStateChanged(auth,  async (user)=> {
             if(user) {
                 if(!state.user.data || !state.chats.data) {
-                    await dispatch(getUser());
-                    dispatch(loadChats());
+                     await dispatch(getUser());
+                     dispatch(loadChats());
                 }
             }
             else goHome();
         })
-    }, [goHome, dispatch, state.chats.data, state.user.data]);
+    }, [goHome, dispatch,]);
 
     return state.user.data && state.chats.data ? <div>{children}</div> : <></>;
 }

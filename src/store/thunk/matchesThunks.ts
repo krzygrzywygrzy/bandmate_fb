@@ -3,7 +3,7 @@ import {SwipesActionType, UserActionType} from "../actions/actionTypes";
 import SwipesAction from "../actions/swipesActions";
 import UserAction from "../actions/userActions";
 import {RootState} from "../store";
-import {doc, updateDoc, writeBatch, collection, addDoc,} from "firebase/firestore";
+import {doc, updateDoc, writeBatch,} from "firebase/firestore";
 import {firestore} from "../../firebase";
 import {ThunkMessages} from "../../core/exports";
 
@@ -74,3 +74,15 @@ export const likeOrMatch = (
     }
   };
 };
+
+export const unmatch = (id: string):
+    ThunkAction<Promise<ThunkMessages>, RootState, unknown, UserAction | SwipesAction> => {
+  return async (
+      dispatch: ThunkDispatch<RootState, unknown, UserAction | SwipesAction>,): Promise<ThunkMessages> => {
+    try {
+      return ThunkMessages.SUCCESS;
+    } catch (err: any) {
+      return ThunkMessages.ERROR;
+    }
+  }
+}

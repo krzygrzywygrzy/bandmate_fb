@@ -4,6 +4,7 @@
   padding: 0.5rem 0;
   border-bottom: 1px solid #dddddd;
   background: white;
+  height: 2.5rem;
 }
 .navbar-container {
   display: flex;

@@ -1,16 +1,47 @@
+@import "../../../../scss/global";
+
 .user-chat-card {
   display: flex;
   align-items: center;
+  cursor: pointer;
+  padding: 0.75rem;
 
   &-avatar {
     height: 50px;
     width: 50px;
+    text-align: center;
+    line-height: 50px;
 
-    img {
-      height: 100%;
-      width: 100%;
-      border-radius: 100%;
+      img {
+        height: 100%;
+        width: 100%;
+        border-radius: 100%;
+      }
+
+      &-border {
+        border: 1px solid $gray;
+      }
+
+  }
+
+  &-info {
+    display: none;
+    margin-left: 1rem;
+    flex-direction: column;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+    &-last-msg {
+      font-size: 0.75rem;
     }
   }
 }
 
+@media (min-width: 768px) {
+  .user-chat-card {
+    &-info {
+      display: flex;
+    }
+  }
+}

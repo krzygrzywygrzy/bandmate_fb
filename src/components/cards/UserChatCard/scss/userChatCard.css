@@ -1,15 +1,97 @@
+.container {
+  width: 90%;
+  margin: auto;
+}
+
+.text-input {
+  text-overflow: ellipsis ellipsis;
+  font-family: inherit;
+  margin-bottom: 0.5rem;
+  border: none;
+  border-bottom: 1px solid #dddddd;
+  padding: 0.5rem 1rem;
+  width: 90%;
+  transition: border 0.25s ease-in-out;
+}
+
+.text-input:disabled {
+  background: transparent;
+}
+
+.text-input:focus,
+textarea:focus {
+  outline: none;
+  border-color: black;
+}
+
+textarea {
+  font-family: inherit;
+  margin-bottom: 0.5rem;
+  border: none;
+  border: 1px solid #dddddd;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  width: 90%;
+  transition: border 0.25s ease-in-out;
+  resize: none;
+  box-sizing: unset;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 760px;
+  }
+
+  .text-input {
+    width: 350px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 980px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1190px;
+  }
+}
 .user-chat-card {
   display: flex;
   align-items: center;
+  cursor: pointer;
+  padding: 0.75rem;
 }
 .user-chat-card-avatar {
   height: 50px;
   width: 50px;
+  text-align: center;
+  line-height: 50px;
 }
 .user-chat-card-avatar img {
   height: 100%;
   width: 100%;
   border-radius: 100%;
+}
+.user-chat-card-avatar-border {
+  border: 1px solid #dddddd;
+}
+.user-chat-card-info {
+  display: none;
+  margin-left: 1rem;
+  flex-direction: column;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.user-chat-card-info-last-msg {
+  font-size: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .user-chat-card-info {
+    display: flex;
+  }
 }
 
 /*# sourceMappingURL=userChatCard.css.map */
