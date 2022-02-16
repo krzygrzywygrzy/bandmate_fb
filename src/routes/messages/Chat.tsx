@@ -3,6 +3,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store/store";
 import "./scss/messages.css";
 import {FiSend} from "react-icons/fi";
+import {getMessages} from "../../store/thunk/messagesThunks";
+import MessageBox from "./MessageBox";
 
 type Props = {
   id: string;
@@ -36,7 +38,7 @@ const Chat: React.FC<Props> = ({id}) => {
   return <div className="chat">
     <header>{chat.user.name} {chat.user.surname}</header>
     <section className="chat-messages">
-      messages
+      {chat && <MessageBox id={id}/>}
     </section>
     <section className="chat-input">
       <input placeholder="type something..."

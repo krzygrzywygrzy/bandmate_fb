@@ -20,27 +20,31 @@ export const loadChats = ():
       const user = getState().user.data;
       if (!user) throw Error("User not logged in!");
 
-      const matchesQuery = query(
-          collection(firestore, "matches"),
-          where("id", "in", user.matches));
 
-      let chats: chat[] = [];
-      const matchesSnapshots = await getDocs(matchesQuery);
-      for(let match of matchesSnapshots.docs) {
-        const data = match.data() as Match;
+      if(user.matches.length> 0) {
+        const matchesQuery = query(
+            collection(firestore, "matches"),
+            where("chat_id", "in", user.matches));
 
-        //get data of swipe
-        const swipeId: string = data.users.filter((el)=> el!== user.id)[0];
-        const swipe = await getDoc(doc(firestore, "users", swipeId));
-        chats.push(
-            {
-              lastMessage: data.lastMessage,
-              user: swipe.data() as User,
-              id: match.id,
-            }
-        );
+        let chats: chat[] = [];
+        const matchesSnapshots = await getDocs(matchesQuery);
+        for (let match of matchesSnapshots.docs) {
+          const data = match.data() as Match;
+          //get data of swipe
+          const swipeId: string = data.users.filter((el) => el !== user.id)[0];
+          const swipe = await getDoc(doc(firestore, "users", swipeId));
+          chats.push(
+              {
+                lastMessage: data.lastMessage,
+                user: swipe.data() as User,
+                id: match.id,
+              }
+          );
+        }
+        dispatch({type: ChatActionType.LOADED, payload: chats});
+      } else {
+        dispatch({type: ChatActionType.LOADED, payload: []});
       }
-      dispatch({type: ChatActionType.LOADED, payload: chats});
     } catch (err: any) {
       console.log(err);
       dispatch({type: ChatActionType.ERROR, payload: err});
