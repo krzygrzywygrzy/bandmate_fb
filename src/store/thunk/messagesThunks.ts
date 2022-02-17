@@ -2,7 +2,7 @@ import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {RootState} from "../store";
 import MessagesAction from "../actions/messagesActions";
 import {MessagesActionType} from "../actions/actionTypes";
-import {collection, getDocs, query, where} from "firebase/firestore";
+import {collection, getDocs, query, where, doc, setDoc, writeBatch} from "firebase/firestore";
 import {firestore} from "../../firebase";
 import Message from "../../models/Message";
 import {ThunkMessages} from "../../core/exports";
@@ -29,9 +29,33 @@ export const getMessages = (id: string):
   }
 }
 
-export const sendMessage = (id: string, message: string):
+export const sendMessage = (chat_id: string, content: string):
     ThunkAction<Promise<ThunkMessages>, RootState, unknown, MessagesAction | ChatActions> => {
-  return async (): Promise<ThunkMessages> => {
-    return  ThunkMessages.SUCCESS;
+  return async (
+      dispatch: ThunkDispatch<RootState, unknown, MessagesAction | ChatActions>,
+      getState: ()=> RootState,
+  ): Promise<ThunkMessages> => {
+    try {
+      const user = getState().user.data;
+      if(!user) throw Error();
+
+      const batch = writeBatch(firestore);
+      const newMessage: Message = {
+        sent: Date.now(),
+        chat_id,
+        content,
+        user_id: "",
+      }
+      const messageDoc = doc(firestore, "messages");
+      batch.set(messageDoc, {lastMessage: newMessage});
+      batch.update(doc(firestore, "matches", chat_id), newMessage);
+      await batch.commit();
+
+      //TODO: update last message in chat;
+
+      return ThunkMessages.SUCCESS;
+    } catch (err: any) {
+      return  ThunkMessages.ERROR;
+    }
   }
 }
