@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store/store";
 import "./scss/messages.css";
 import {FiSend} from "react-icons/fi";
-import {getMessages} from "../../store/thunk/messagesThunks";
+import {sendMessage as sendThunk} from "../../store/thunk/messagesThunks";
 import MessageBox from "./MessageBox";
 
 type Props = {
@@ -22,7 +22,7 @@ const Chat: React.FC<Props> = ({id}) => {
   // send when enter is clicked
   useEffect(() => {
     const send = (e: KeyboardEvent) => {
-      if (e.key === "Enter" || phrase.length > 2)
+      if (e.key === "Enter" && phrase.length > 2)
         sendMessage();
     };
     document.addEventListener("keypress", send);
@@ -32,7 +32,7 @@ const Chat: React.FC<Props> = ({id}) => {
   }, []);
 
   const sendMessage = async () => {
-
+    var res = await  dispatch(sendThunk(id, phrase));
   }
 
   return <div className="chat">
@@ -43,7 +43,9 @@ const Chat: React.FC<Props> = ({id}) => {
     <section className="chat-input">
       <input placeholder="type something..."
              value={phrase} onChange={(e) => setPhrase(e.target.value)}/>
-      <div><FiSend size={24}/></div>
+      <div onClick={()=> {
+        if(phrase.length >2 ) sendMessage();
+      }}><FiSend size={24}/></div>
     </section>
   </div>;
 }

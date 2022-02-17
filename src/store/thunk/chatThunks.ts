@@ -24,7 +24,7 @@ export const loadChats = ():
       if(user.matches.length> 0) {
         const matchesQuery = query(
             collection(firestore, "matches"),
-            where("chat_id", "in", user.matches));
+            where("id", "in", user.matches));
 
         let chats: chat[] = [];
         const matchesSnapshots = await getDocs(matchesQuery);
