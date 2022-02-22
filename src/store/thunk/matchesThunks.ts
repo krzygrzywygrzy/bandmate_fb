@@ -6,6 +6,7 @@ import {RootState} from "../store";
 import {doc, updateDoc, writeBatch,} from "firebase/firestore";
 import {firestore} from "../../firebase";
 import {ThunkMessages} from "../../core/exports";
+import {v4 as uuid} from "uuid";
 
 export const likeOrMatch = (
     liked: boolean
@@ -30,7 +31,7 @@ export const likeOrMatch = (
           const batch = writeBatch(firestore);
 
           //create new match document with chat collection
-          const matchDoc = doc(firestore, "matches", `${you.id}_${swipe.id}`);
+          const matchDoc = doc(firestore, "matches", uuid());
           batch.set(matchDoc, {
             users: [you.id, swipe.id],
             chatMessages: [],
@@ -80,6 +81,7 @@ export const unmatch = (id: string):
   return async (
       dispatch: ThunkDispatch<RootState, unknown, UserAction | SwipesAction>,): Promise<ThunkMessages> => {
     try {
+      //TODO: implement
       return ThunkMessages.SUCCESS;
     } catch (err: any) {
       return ThunkMessages.ERROR;

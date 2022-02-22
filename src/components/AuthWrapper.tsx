@@ -8,7 +8,6 @@ import {onAuthStateChanged} from "firebase/auth";
 import {RootState} from "../store/store";
 import {collection, onSnapshot, query, where} from "firebase/firestore";
 
-
 const AuthWrapper: React.FC = ({children}) => {
   const [, setLocation] = useLocation();
   const goHome = useCallback(() => setLocation("/"), [setLocation]);
@@ -25,19 +24,22 @@ const AuthWrapper: React.FC = ({children}) => {
         }
       } else goHome();
     })
-  }, [goHome, dispatch,]);
+  }, [goHome, dispatch]);
 
   useEffect(() => {
-    const q = query(collection(firestore, "matches"), where("id", "in", state.user.data?.matches));
-    const subscription = onSnapshot(
-        q, (snapshot) => {
-        snapshot.docChanges().forEach((change) => {
-          if(change.type === "modified") {
-            console.log(change.doc.data());
-          }
-        })
-    });
-  }, []);
+    if(state.user.data && state.user.data?.matches.length > 0 ) {
+      const q = query(collection(firestore, "matches"), where("id", "in",
+          state.user.data && state.user.data!.matches));
+      const subscription = onSnapshot(
+          q, (snapshot) => {
+            snapshot.docChanges().forEach((change) => {
+              if (change.type === "modified") {
+                console.log(change.doc.data());
+              }
+            })
+          });
+    }
+  }, [state.user.data]);
 
 
   return state.user.data && state.chats.data ? <div>{children}</div> : <></>;

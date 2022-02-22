@@ -33,6 +33,7 @@ const Chat: React.FC<Props> = ({id}) => {
 
   const sendMessage = async () => {
     var res = await  dispatch(sendThunk(id, phrase));
+    console.log(res);
     setPhrase("");
   }
 

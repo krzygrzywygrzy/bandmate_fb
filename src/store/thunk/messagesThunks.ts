@@ -7,6 +7,7 @@ import {firestore} from "../../firebase";
 import Message from "../../models/Message";
 import {ThunkMessages} from "../../core/exports";
 import ChatActions from "../actions/chatActions";
+import {v4 as uuid} from "uuid";
 
 export const getMessages = (id: string):
     ThunkAction<void, RootState, unknown, MessagesAction> => {
@@ -44,17 +45,17 @@ export const sendMessage = (chat_id: string, content: string):
         sent: Date.now(),
         chat_id,
         content,
-        user_id: "",
+        user_id: user.id,
       }
-      const messageDoc = doc(firestore, "messages");
+
+      const messageDoc = doc(firestore, "messages", uuid());
       batch.set(messageDoc, {lastMessage: newMessage});
       batch.update(doc(firestore, "matches", chat_id), newMessage);
       await batch.commit();
 
-      //TODO: update last message in chat;
-
       return ThunkMessages.SUCCESS;
     } catch (err: any) {
+      console.log(err);
       return  ThunkMessages.ERROR;
     }
   }

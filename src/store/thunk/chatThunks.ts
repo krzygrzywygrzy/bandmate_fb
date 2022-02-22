@@ -20,8 +20,7 @@ export const loadChats = ():
       const user = getState().user.data;
       if (!user) throw Error("User not logged in!");
 
-
-      if(user.matches.length> 0) {
+      if(user.matches.length > 0) {
         const matchesQuery = query(
             collection(firestore, "matches"),
             where("id", "in", user.matches));
