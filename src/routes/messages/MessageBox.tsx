@@ -1,9 +1,10 @@
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store/store";
-import {getMessages} from "../../store/thunk/messagesThunks";
+import {getMessages, pushNewMessage} from "../../store/thunk/messagesThunks";
 import {collection, onSnapshot, query, where} from "firebase/firestore";
 import {firestore} from "../../firebase";
+import Message from "../../models/Message";
 
 type Props = {
   id: string;
@@ -24,13 +25,12 @@ const MessageBox: React.FC<Props> = ({id}) => {
       onSnapshot(q, snapshot => {
         snapshot.docChanges().forEach((change) => {
           if(change.type === "added") {
-            console.log(change.doc.data());
-            //TODO: add new message to messagesThunk
+            dispatch(pushNewMessage(change.doc.data() as Message));
           }
         })
       })
     }
-  }, [id, messages.data]);
+  }, [messages.data, dispatch]);
 
 
 

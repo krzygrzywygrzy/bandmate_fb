@@ -1,13 +1,13 @@
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {RootState} from "../store";
 import ChatActions from "../actions/chatActions";
+import chatActions from "../actions/chatActions";
 import {ChatActionType} from "../actions/actionTypes";
 import {collection, doc, getDoc, getDocs, query, where} from "firebase/firestore";
 import {firestore} from "../../firebase";
 import Match from "../../models/Match";
 import chat from "../../models/Chat";
 import User from "../../models/User";
-import chatActions from "../actions/chatActions";
 
 export const loadChats = ():
     ThunkAction<void, RootState, unknown, ChatActions> => {
@@ -54,7 +54,23 @@ export const loadChats = ():
 
 export const updateChatList = (match: Match):
     ThunkAction<void, RootState, unknown, chatActions> => {
-  return async (dispatch: ThunkDispatch<RootState, unknown, ChatActions>) => {
+  return async (
+      dispatch: ThunkDispatch<RootState, unknown, ChatActions>,
+      getState: ()=> RootState,
+      ) => {
+
+    try {
+      let chats = getState().chats.data;
+      if(!chats) throw Error("Chats are not loaded");
+
+      let toUpdate = chats.filter((chat) => chat.id !== match.id)[0];
+      toUpdate.lastMessage = match.lastMessage;
+      chats.unshift(toUpdate);
+
+      dispatch({type: ChatActionType.LOADED, payload: chats});
+    } catch (err: any) {
+      console.log("Could not update chats");
+    }
     console.log(match);
   }
 }

@@ -2,7 +2,7 @@ import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {RootState} from "../store";
 import MessagesAction from "../actions/messagesActions";
 import {MessagesActionType} from "../actions/actionTypes";
-import {collection, getDocs, query, where, doc, writeBatch} from "firebase/firestore";
+import {collection, doc, getDocs, query, where, writeBatch} from "firebase/firestore";
 import {firestore} from "../../firebase";
 import Message from "../../models/Message";
 import {ThunkMessages} from "../../core/exports";
@@ -61,3 +61,18 @@ export const sendMessage = (chat_id: string, content: string):
   }
 }
 
+export const pushNewMessage = (message: Message):
+    ThunkAction<void, RootState, unknown, MessagesAction> => {
+  return async (
+      dispatch: ThunkDispatch<RootState, unknown, MessagesAction>,
+      getState: () => RootState,
+  ) => {
+    try {
+      const messages = getState().messages.data;
+      if (!messages) throw Error();
+      dispatch({type: MessagesActionType.LOADED, payload: [...messages, message]});
+    } catch (err: any) {
+      //TODO: react to error
+    }
+  }
+}
