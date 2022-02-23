@@ -3,10 +3,11 @@ import {useLocation} from "wouter";
 import {auth, firestore} from "../firebase";
 import {useDispatch, useSelector} from "react-redux";
 import {getUser} from "../store/thunk/userThunks";
-import {loadChats} from "../store/thunk/chatThunks";
+import {loadChats, updateChatList} from "../store/thunk/chatThunks";
 import {onAuthStateChanged} from "firebase/auth";
 import {RootState} from "../store/store";
 import {collection, onSnapshot, query, where} from "firebase/firestore";
+import Match from "../models/Match";
 
 const AuthWrapper: React.FC = ({children}) => {
   const [, setLocation] = useLocation();
@@ -30,16 +31,16 @@ const AuthWrapper: React.FC = ({children}) => {
     if(state.user.data && state.user.data?.matches.length > 0 ) {
       const q = query(collection(firestore, "matches"), where("id", "in",
           state.user.data && state.user.data!.matches));
-      const subscription = onSnapshot(
+      onSnapshot(
           q, (snapshot) => {
             snapshot.docChanges().forEach((change) => {
               if (change.type === "modified") {
-                console.log(change.doc.data());
+                dispatch(updateChatList(change.doc.data() as Match));
               }
             })
           });
     }
-  }, [state.user.data]);
+  }, [state.user]);
 
 
   return state.user.data && state.chats.data ? <div>{children}</div> : <></>;

@@ -27,27 +27,28 @@ export const likeOrMatch = (
 
         const swipe = getState().swipes.data![0];
         if (swipe.likes.includes(you.id)) {
+          const match_id = uuid();
+
           //match
           const batch = writeBatch(firestore);
 
           //create new match document with chat collection
-          const matchDoc = doc(firestore, "matches", uuid());
+          const matchDoc = doc(firestore, "matches", match_id);
           batch.set(matchDoc, {
             users: [you.id, swipe.id],
-            chatMessages: [],
-            id: `${you.id}_${swipe.id}`,
+            id: match_id,
           });
 
           //update yours data
           const toUpdate = {
             likes: [...you.likes, swipe.id],
-            matches: [...you.matches, matchDoc.id],
+            matches: [...you.matches, match_id],
           };
           batch.update(doc(firestore, "users", you.id), toUpdate);
 
           //update swipe's data
           batch.update(doc(firestore, "users", swipe.id), {
-            matches: [...swipe.matches, matchDoc.id],
+            matches: [...swipe.matches, match_id],
           });
 
           await batch.commit();

@@ -7,6 +7,7 @@ import {firestore} from "../../firebase";
 import Match from "../../models/Match";
 import chat from "../../models/Chat";
 import User from "../../models/User";
+import chatActions from "../actions/chatActions";
 
 export const loadChats = ():
     ThunkAction<void, RootState, unknown, ChatActions> => {
@@ -20,7 +21,7 @@ export const loadChats = ():
       const user = getState().user.data;
       if (!user) throw Error("User not logged in!");
 
-      if(user.matches.length > 0) {
+      if (user.matches.length > 0) {
         const matchesQuery = query(
             collection(firestore, "matches"),
             where("id", "in", user.matches));
@@ -48,5 +49,12 @@ export const loadChats = ():
       console.log(err);
       dispatch({type: ChatActionType.ERROR, payload: err});
     }
+  }
+}
+
+export const updateChatList = (match: Match):
+    ThunkAction<void, RootState, unknown, chatActions> => {
+  return async (dispatch: ThunkDispatch<RootState, unknown, ChatActions>) => {
+    console.log(match);
   }
 }
