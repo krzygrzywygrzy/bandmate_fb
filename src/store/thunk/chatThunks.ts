@@ -56,12 +56,11 @@ export const updateChatList = (match: Match):
     ThunkAction<void, RootState, unknown, chatActions> => {
   return async (
       dispatch: ThunkDispatch<RootState, unknown, ChatActions>,
-      getState: ()=> RootState,
-      ) => {
-
+      getState: () => RootState,
+  ) => {
     try {
       let chats = getState().chats.data;
-      if(!chats) throw Error("Chats are not loaded");
+      if (!chats) throw Error("Chats are not loaded");
 
       let toUpdate = chats.filter((chat) => chat.id === match.id)[0];
       toUpdate.lastMessage = match.lastMessage;

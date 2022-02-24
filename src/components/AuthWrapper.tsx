@@ -9,6 +9,7 @@ import {RootState} from "../store/store";
 import {collection, onSnapshot, query, where} from "firebase/firestore";
 import Match from "../models/Match";
 
+
 const AuthWrapper: React.FC = ({children}) => {
   const [, setLocation] = useLocation();
   const goHome = useCallback(() => setLocation("/"), [setLocation]);
@@ -28,17 +29,22 @@ const AuthWrapper: React.FC = ({children}) => {
   }, [goHome, dispatch]);
 
   useEffect(() => {
-    if(state.user.data && state.user.data?.matches.length > 0 ) {
+    let unsubscribe: any;
+    if (state.user.data && state.user.data?.matches.length > 0) {
       const q = query(collection(firestore, "matches"), where("id", "in",
           state.user.data && state.user.data!.matches));
-      onSnapshot(
+      unsubscribe = onSnapshot(
           q, (snapshot) => {
-            snapshot.docChanges().forEach((change) => {
-              if (change.type === "modified") {
-                dispatch(updateChatList(change.doc.data() as Match));
-              }
-            })
+              if(snapshot.size)
+              snapshot.docChanges().forEach((change) => {
+                if (change.type === "modified") {
+                  dispatch(updateChatList(change.doc.data() as Match));
+                }
+              });
           });
+    }
+    return () => {
+      if (unsubscribe) unsubscribe();
     }
   }, [state.user]);
 
