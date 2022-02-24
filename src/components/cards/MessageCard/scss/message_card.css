@@ -1,0 +1,19 @@
+.message-card {
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+}
+.message-card-yours {
+  background: #7c3aed;
+  color: white;
+  justify-self: flex-end;
+}
+.message-card-not-yours {
+  background: #dddddd;
+}
+
+.message-wrapper {
+  display: flex;
+  padding-bottom: 0.5rem;
+}
+
+/*# sourceMappingURL=message_card.css.map */

@@ -5,6 +5,8 @@ import {getMessages, pushNewMessage} from "../../store/thunk/messagesThunks";
 import {collection, onSnapshot, query, where} from "firebase/firestore";
 import {firestore} from "../../firebase";
 import Message from "../../models/Message";
+import MessageCard from "../../components/cards/MessageCard/MessageCard";
+import "./scss/messages.css";
 
 type Props = {
   id: string;
@@ -32,15 +34,13 @@ const MessageBox: React.FC<Props> = ({id}) => {
     }
   }, []);
 
-
-
   if(messages.loading) return <div>Loading...</div>
   if(messages.error) return  <div>Error while loading messages</div>;
 
-  return messages.data ? <div>
+  return messages.data ? <div className="messages-box">
     {messages.data.length > 0 ? <div>
       {messages.data.map((message, index)=>
-          <div key={index}>{message.content}</div>)}
+          <div key={index}><MessageCard message={message}/></div>)}
     </div>: <div>There are no messages yet!</div>}
   </div> : <></>;
 }

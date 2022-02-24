@@ -31,6 +31,17 @@
 }
 .chat-messages {
   flex-grow: 1;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-top: 0.25rem;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+.chat-messages::-webkit-scrollbar {
+  display: none;
 }
 .chat-input {
   border-top: 1px solid #dddddd;
@@ -53,6 +64,11 @@
   display: flex;
   margin-left: 1rem;
   cursor: pointer;
+}
+
+.messages-box {
+  height: 100%;
+  margin-bottom: 0.25rem;
 }
 
 @media (min-width: 768px) {

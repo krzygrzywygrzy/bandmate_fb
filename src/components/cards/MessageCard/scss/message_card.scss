@@ -1,0 +1,22 @@
+@import "../../../../scss/colors";
+
+.message-card {
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+
+  &-yours {
+    background: $purple;
+    color: white;
+    justify-self: flex-end;
+  }
+
+  &-not-yours {
+    background: $gray;
+  }
+}
+
+.message-wrapper {
+  display: flex;
+  padding-bottom: 0.5rem;
+}
+
