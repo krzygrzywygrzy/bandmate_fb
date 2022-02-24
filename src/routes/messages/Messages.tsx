@@ -18,12 +18,12 @@ const Messages: React.FC<Props> = ({id}) => {
   if (chats.error) return <div className="container">Error :( {chats.error.message}</div>
 
   return chats.data ?
-      <div className="container messages">
+      <div className="messages">
         {chats.data.length > 0 ? <div className="messages-list">
           {chats.data.map((chat) => {
             return <div key={chat.id} onClick={() => setLocation(`/messages/${chat.id}`)}><UserChatCard
                 displayName={`${chat.user.name} ${chat.user.surname}`}
-                lastMessage={"No messages yet!"}
+                lastMessage={chat.lastMessage}
                 image={chat.user.photoUrls}/></div>
           })}
         </div> : <div className="messages-list">

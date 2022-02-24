@@ -63,14 +63,15 @@ export const updateChatList = (match: Match):
       let chats = getState().chats.data;
       if(!chats) throw Error("Chats are not loaded");
 
-      let toUpdate = chats.filter((chat) => chat.id !== match.id)[0];
+      let toUpdate = chats.filter((chat) => chat.id === match.id)[0];
       toUpdate.lastMessage = match.lastMessage;
+
+      chats = chats.filter((chat) => chat.id !== match.id);
       chats.unshift(toUpdate);
 
       dispatch({type: ChatActionType.LOADED, payload: chats});
     } catch (err: any) {
-      console.log("Could not update chats");
+      console.log(err);
     }
-    console.log(match);
   }
 }

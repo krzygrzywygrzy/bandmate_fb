@@ -30,7 +30,7 @@ const MessageBox: React.FC<Props> = ({id}) => {
         })
       })
     }
-  }, [messages.data, dispatch]);
+  }, []);
 
 
 
@@ -39,7 +39,8 @@ const MessageBox: React.FC<Props> = ({id}) => {
 
   return messages.data ? <div>
     {messages.data.length > 0 ? <div>
-      messages
+      {messages.data.map((message, index)=>
+          <div key={index}>{message.content}</div>)}
     </div>: <div>There are no messages yet!</div>}
   </div> : <></>;
 }

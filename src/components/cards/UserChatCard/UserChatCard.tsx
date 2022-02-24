@@ -1,10 +1,11 @@
 import React from "react";
 import useGetPhotoUrl from "../../../core/useGetPhotoUrl";
 import "./scss/userChatCard.css";
+import Message from "../../../models/Message";
 
 type Props = {
   displayName: string;
-  lastMessage: string;
+  lastMessage?: Message;
   image: string[];
 }
 
@@ -22,7 +23,7 @@ const UserChatCard: React.FC<Props> = (
     </div>
     <div className="user-chat-card-info">
       <span>{displayName}</span>
-      <span className="user-chat-card-info-last-msg">{lastMessage}</span>
+      <span className="user-chat-card-info-last-msg">{} {lastMessage ? lastMessage.content: "No messages yet!"}</span>
     </div>
   </div>
 }

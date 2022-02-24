@@ -32,8 +32,7 @@ const Chat: React.FC<Props> = ({id}) => {
   }, []);
 
   const sendMessage = async () => {
-    var res = await  dispatch(sendThunk(id, phrase));
-    console.log(res);
+    var res = await dispatch(sendThunk(id, phrase));
     setPhrase("");
   }
 
@@ -45,8 +44,8 @@ const Chat: React.FC<Props> = ({id}) => {
     <section className="chat-input">
       <input placeholder="type something..."
              value={phrase} onChange={(e) => setPhrase(e.target.value)}/>
-      <div onClick={()=> {
-        if(phrase.length >2 ) sendMessage();
+      <div onClick={() => {
+        if (phrase.length > 2) sendMessage();
       }}><FiSend size={24}/></div>
     </section>
   </div>;
