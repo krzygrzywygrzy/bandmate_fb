@@ -11,9 +11,11 @@ type Props = {
 const MessageCard: React.FC<Props> = ({message}) => {
   const userId = useSelector((state: RootState) => state.user.data!.id);
 
-  return <div className="message-wrapper"><div className={`message-card ${message.user_id === userId ? "message-card-yours" : "message-card-not-yours"}`}>
-    {message.content}
-  </div></div>
+  return <div className={`message-wrapper ${userId===message.user_id && "message-wrapper-yours"}`}>
+    <div className={`message-card ${message.user_id === userId ? "message-card-yours" : "message-card-not-yours"}`}>
+      {message.content}
+    </div>
+  </div>
 }
 
 export default MessageCard;

@@ -5,6 +5,7 @@
   border-radius: 5px;
 
   &-yours {
+    display: flex;
     background: $purple;
     color: white;
     justify-self: flex-end;
@@ -18,5 +19,9 @@
 .message-wrapper {
   display: flex;
   padding-bottom: 0.5rem;
+
+  &-yours{
+    justify-content: flex-end;
+  }
 }
 

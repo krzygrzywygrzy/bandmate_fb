@@ -3,6 +3,7 @@
   border-radius: 5px;
 }
 .message-card-yours {
+  display: flex;
   background: #7c3aed;
   color: white;
   justify-self: flex-end;
@@ -14,6 +15,9 @@
 .message-wrapper {
   display: flex;
   padding-bottom: 0.5rem;
+}
+.message-wrapper-yours {
+  justify-content: flex-end;
 }
 
 /*# sourceMappingURL=message_card.css.map */
