@@ -10,6 +10,7 @@ import {unmatch} from "../../store/thunk/matchesThunks";
 import Popup from "../../components/popup/Popup";
 import {ThunkMessages} from "../../core/exports";
 import {useLocation} from "wouter";
+import {ChatActionType} from "../../store/actions/actionTypes";
 
 type Props = {
   id: string;
@@ -22,6 +23,7 @@ const Chat: React.FC<Props> = ({id}) => {
   const chat = useSelector(
       (state: RootState) =>
           state.chats.data!.filter((chat) => chat.id === id)[0]);
+  const chats = useSelector((state: RootState) => state.chats.data);
 
   const [phrase, setPhrase] = useState<string>("");
   const [unmatchPopup, setUnmatchPopup] = useState<boolean>(false);
@@ -46,11 +48,12 @@ const Chat: React.FC<Props> = ({id}) => {
   }
 
   const handleUnmatch = async () => {
-    const res: any = await unmatch(id);
+    const res: any = await dispatch(unmatch(id));
     if (res === ThunkMessages.ERROR) {
       setUnmatchFailure(true);
     } else {
       setLocation("/messages");
+      dispatch({type: ChatActionType.LOADED, payload: chats!.filter(chat => chat.id !== id)});
     }
   }
 
@@ -85,7 +88,6 @@ const Chat: React.FC<Props> = ({id}) => {
           <div className="yes-button" onClick={() => setUnmatchFailure(false)}>Ok</div>
         </div>
       </div>
-
     </Popup>
   </div>;
 }

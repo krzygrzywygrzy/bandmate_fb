@@ -30,7 +30,6 @@ const AuthWrapper: React.FC = ({children}) => {
           //TODO: check out why changes monitoring does not work
           unsubscribe = onSnapshot(q,
               (snapshot) => {
-                console.log(snapshot);
                 snapshot.docChanges().forEach((change) => {
                   if (change.type === "modified") {
                     dispatch(updateChatList(change.doc.data() as Match));
