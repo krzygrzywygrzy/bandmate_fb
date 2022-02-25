@@ -8,12 +8,15 @@ import MessageBox from "./MessageBox";
 import {FiUserX} from "react-icons/fi";
 import {unmatch} from "../../store/thunk/matchesThunks";
 import Popup from "../../components/popup/Popup";
+import {ThunkMessages} from "../../core/exports";
+import {useLocation} from "wouter";
 
 type Props = {
   id: string;
 }
 
 const Chat: React.FC<Props> = ({id}) => {
+  const [, setLocation] = useLocation();
   const dispatch = useDispatch();
 
   const chat = useSelector(
@@ -22,6 +25,7 @@ const Chat: React.FC<Props> = ({id}) => {
 
   const [phrase, setPhrase] = useState<string>("");
   const [unmatchPopup, setUnmatchPopup] = useState<boolean>(false);
+  const [unmatchFailure, setUnmatchFailure] = useState<boolean>(false);
 
   // send when enter is clicked
   useEffect(() => {
@@ -41,10 +45,19 @@ const Chat: React.FC<Props> = ({id}) => {
     setPhrase("");
   }
 
+  const handleUnmatch = async () => {
+    const res: any = await unmatch(id);
+    if (res === ThunkMessages.ERROR) {
+      setUnmatchFailure(true);
+    } else {
+      setLocation("/messages");
+    }
+  }
+
   return <div className="chat">
     <header>
       <div>{chat.user.name} {chat.user.surname}</div>
-      <div className="unmatch" onClick={()=> setUnmatchPopup(true)}><span>unmatch</span><FiUserX size={20}/></div>
+      <div className="unmatch" onClick={() => setUnmatchPopup(true)}><span>unmatch</span><FiUserX size={20}/></div>
     </header>
     <section className="chat-messages">
       {chat && <MessageBox id={id}/>}
@@ -60,10 +73,19 @@ const Chat: React.FC<Props> = ({id}) => {
       <div className="unmatch-popup">
         <div className="unmatch-popup-message">Are you sure?</div>
         <div className="unmatch-popup-buttons">
-          <div>No</div>
-          <div className="yes-button">Yes</div>
+          <div onClick={() => setUnmatchPopup(false)}>No</div>
+          <div className="yes-button" onClick={handleUnmatch}>Yes</div>
         </div>
       </div>
+    </Popup>
+    <Popup trigger={unmatchFailure}>
+      <div className="unmatch-popup">
+        <div className="unmatch-popup-message">Could not perform this action! Try again later...</div>
+        <div className="unmatch-popup-buttons">
+          <div className="yes-button" onClick={() => setUnmatchFailure(false)}>Ok</div>
+        </div>
+      </div>
+
     </Popup>
   </div>;
 }
