@@ -9,7 +9,6 @@ import {RootState} from "../store/store";
 import {collection, onSnapshot, query, where} from "firebase/firestore";
 import Match from "../models/Match";
 
-
 const AuthWrapper: React.FC = ({children}) => {
   const [, setLocation] = useLocation();
   const goHome = useCallback(() => setLocation("/"), [setLocation]);
@@ -26,11 +25,13 @@ const AuthWrapper: React.FC = ({children}) => {
           const matches: any = await dispatch(getUser());
           await dispatch(loadChats());
 
-          unsubscribe = onSnapshot(
-              query(collection(firestore, "matches"), where("id", "in", matches)),
+          const q = query(collection(firestore, "matches"), where("id", "in", matches));
+
+          //TODO: check out why changes monitoring does not work
+          unsubscribe = onSnapshot(q,
               (snapshot) => {
+                console.log(snapshot);
                 snapshot.docChanges().forEach((change) => {
-                  console.log(change);
                   if (change.type === "modified") {
                     dispatch(updateChatList(change.doc.data() as Match));
                   }
