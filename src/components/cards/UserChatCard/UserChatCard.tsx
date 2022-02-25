@@ -23,7 +23,7 @@ const UserChatCard: React.FC<Props> = (
     </div>
     <div className="user-chat-card-info">
       <span>{displayName}</span>
-      <span className="user-chat-card-info-last-msg">{} {lastMessage ? lastMessage.content: "No messages yet!"}</span>
+      <span className="user-chat-card-info-last-msg">{lastMessage ? new Date(lastMessage.sent).toDateString() : ""} * {lastMessage ? lastMessage.content: "No messages yet!"}</span>
     </div>
   </div>
 }

@@ -10,9 +10,9 @@ import ChatActions from "../actions/chatActions";
 import {v4 as uuid} from "uuid";
 
 export const getMessages = (id: string):
-    ThunkAction<void, RootState, unknown, MessagesAction> => {
+    ThunkAction<Promise<ThunkMessages>, RootState, unknown, MessagesAction> => {
   return async (
-      dispatch: ThunkDispatch<RootState, unknown, MessagesAction>) => {
+      dispatch: ThunkDispatch<RootState, unknown, MessagesAction>): Promise<ThunkMessages> => {
     try {
       dispatch({type: MessagesActionType.LOAD});
       const coll = collection(firestore, "messages");
@@ -24,8 +24,10 @@ export const getMessages = (id: string):
         messages.push(doc.data() as Message);
       });
       dispatch({type: MessagesActionType.LOADED, payload: messages});
+      return ThunkMessages.SUCCESS;
     } catch (err: any) {
       dispatch({type: MessagesActionType.ERROR, payload: err});
+      return ThunkMessages.ERROR;
     }
   }
 }
@@ -69,10 +71,11 @@ export const pushNewMessage = (message: Message):
   ) => {
     try {
       const messages = getState().messages.data;
-      if (!messages) throw Error();
-      dispatch({type: MessagesActionType.LOADED, payload: [...messages, message]});
+      if (!messages) {
+        dispatch({type: MessagesActionType.LOADED, payload: [message]});
+      };
+      dispatch({type: MessagesActionType.LOADED, payload: [...messages!, message]});
     } catch (err: any) {
-      //TODO: react to error
     }
   }
 }

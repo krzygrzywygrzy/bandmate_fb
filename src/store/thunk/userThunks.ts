@@ -10,33 +10,37 @@ import {ThunkMessages} from "../../core/exports";
 /**
  * ThunkAction that gets current's user data
  */
-export const getUser = (): ThunkAction<
-  void,
-  RootState,
-  unknown,
-  UserAction
-> => {
-  return async (dispatch: ThunkDispatch<RootState, unknown, UserAction>) => {
+export const getUser = (): ThunkAction<void,
+    RootState,
+    unknown,
+    UserAction> => {
+  return async (
+      dispatch: ThunkDispatch<RootState, unknown, UserAction>,
+  ) => {
     try {
-      dispatch({ type: UserActionType.LOAD });
+      dispatch({type: UserActionType.LOAD});
 
       if (!auth.currentUser) throw Error("User not logged in");
 
       const usersRef = collection(firestore, "users");
       const userQuery = query(
-        usersRef,
-        where("id", "==", auth.currentUser!.uid)
+          usersRef,
+          where("id", "==", auth.currentUser!.uid)
       );
 
       const response = await getDocs(userQuery);
       if (response.empty) throw Error("User not found!");
 
+      const user = response.docs[0].data() as User;
       dispatch({
         type: UserActionType.LOADED,
-        payload: response.docs[0].data() as User,
+        payload: user,
       });
+
+      //return is here due to the bug while getting data from store
+      return user.matches;
     } catch (err: any) {
-      dispatch({ type: UserActionType.ERROR, payload: err });
+      dispatch({type: UserActionType.ERROR, payload: err});
     }
   };
 };
@@ -47,7 +51,7 @@ export const getUser = (): ThunkAction<
 export const logOut = (): ThunkAction<void, RootState, unknown, UserAction> => {
   return async (dispatch: ThunkDispatch<RootState, unknown, UserAction>) => {
     await auth.signOut();
-    dispatch({ type: UserActionType.LOG_OUT });
+    dispatch({type: UserActionType.LOG_OUT});
   };
 };
 
@@ -56,11 +60,11 @@ export const logOut = (): ThunkAction<void, RootState, unknown, UserAction> => {
  * @param toUpdate
  */
 export const updatePrimaryData = (
-  toUpdate: UserPrimary
+    toUpdate: UserPrimary
 ): ThunkAction<Promise<ThunkMessages>, RootState, unknown, UserAction> => {
   return async (
-    dispatch: ThunkDispatch<RootState, unknown, UserAction>,
-    getState: () => RootState
+      dispatch: ThunkDispatch<RootState, unknown, UserAction>,
+      getState: () => RootState
   ): Promise<ThunkMessages> => {
     try {
       if (!auth.currentUser) throw Error("User not logged in");
@@ -72,7 +76,7 @@ export const updatePrimaryData = (
       const user = getState().user;
       dispatch({
         type: UserActionType.LOADED,
-        payload: { ...user.data!, ...toUpdate },
+        payload: {...user.data!, ...toUpdate},
       });
       return ThunkMessages.SUCCESS;
     } catch (err: any) {

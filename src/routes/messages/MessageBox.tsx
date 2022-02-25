@@ -1,8 +1,8 @@
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store/store";
-import {getMessages, pushNewMessage} from "../../store/thunk/messagesThunks";
-import {collection, onSnapshot, query, where} from "firebase/firestore";
+import {pushNewMessage} from "../../store/thunk/messagesThunks";
+import {collection, onSnapshot, query, where, orderBy} from "firebase/firestore";
 import {firestore} from "../../firebase";
 import Message from "../../models/Message";
 import MessageCard from "../../components/cards/MessageCard/MessageCard";
@@ -18,25 +18,20 @@ const MessageBox: React.FC<Props> = ({id}) => {
 
   //get messages
   useEffect(() => {
-    dispatch(getMessages(id));
-  }, [id, dispatch]);
+    const q = query(collection(firestore, "messages"),
+        where("chat_id", "==", id), orderBy("sent"),);
 
-  useEffect(() => {
-    let unsubscribe: any;
-    const q = query(collection(firestore, "messages"), where("chat_id", "==", id));
-    if(messages.data)
-    unsubscribe = onSnapshot(q, snapshot => {
-        snapshot.docChanges().forEach((change) => {
-          if(snapshot.size)
-          if (change.type === "added") {
-            dispatch(pushNewMessage(change.doc.data() as Message));
-          }
-        });
-    })
+    const unsubscribe = onSnapshot(q, snapshot => {
+      snapshot.docChanges().forEach((change) => {
+        if (change.type === "added") {
+          dispatch(pushNewMessage(change.doc.data() as Message));
+        }
+      });
+    });
     return () => {
-      if (unsubscribe) unsubscribe();
+      unsubscribe();
     }
-  }, []);
+  }, [id, dispatch]);
 
   if (messages.loading) return <div>Loading...</div>
   if (messages.error) return <div>Error while loading messages</div>;

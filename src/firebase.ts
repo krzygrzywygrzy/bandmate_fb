@@ -21,6 +21,7 @@ const firebase = initializeApp(firebaseConfig);
 export const firestore = initializeFirestore(firebase, {
   useFetchStreams: false,
 } as any);
+
 export const auth = getAuth(firebase);
 export const storage = getStorage(firebase);
 export default firebase;

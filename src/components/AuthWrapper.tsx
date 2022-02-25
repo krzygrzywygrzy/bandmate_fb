@@ -15,41 +15,36 @@ const AuthWrapper: React.FC = ({children}) => {
   const goHome = useCallback(() => setLocation("/"), [setLocation]);
 
   const dispatch = useDispatch();
-  const state = useSelector((state: RootState) => state);
-
-  useEffect(() => {
-    onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        if (!state.user.data || !state.chats.data) {
-          await dispatch(getUser());
-          dispatch(loadChats());
-        }
-      } else goHome();
-    })
-  }, [goHome, dispatch]);
+  const you = useSelector((state: RootState) => state.user);
+  const chats = useSelector((state: RootState) => state.chats);
 
   useEffect(() => {
     let unsubscribe: any;
-    if (state.user.data && state.user.data?.matches.length > 0) {
-      const q = query(collection(firestore, "matches"), where("id", "in",
-          state.user.data && state.user.data!.matches));
-      unsubscribe = onSnapshot(
-          q, (snapshot) => {
-              if(snapshot.size)
-              snapshot.docChanges().forEach((change) => {
-                if (change.type === "modified") {
-                  dispatch(updateChatList(change.doc.data() as Match));
-                }
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        if (!you.data || !chats.data) {
+          const matches: any = await dispatch(getUser());
+          await dispatch(loadChats());
+
+          unsubscribe = onSnapshot(
+              query(collection(firestore, "matches"), where("id", "in", matches)),
+              (snapshot) => {
+                snapshot.docChanges().forEach((change) => {
+                  console.log(change);
+                  if (change.type === "modified") {
+                    dispatch(updateChatList(change.doc.data() as Match));
+                  }
+                });
               });
-          });
-    }
+        }
+      } else goHome();
+    });
     return () => {
       if (unsubscribe) unsubscribe();
     }
-  }, [state.user]);
+  }, [goHome, dispatch]);
 
-
-  return state.user.data && state.chats.data ? <div>{children}</div> : <></>;
+  return you.data && chats.data ? <div>{children}</div> : <></>;
 }
 
 export default AuthWrapper;

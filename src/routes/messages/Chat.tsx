@@ -22,8 +22,9 @@ const Chat: React.FC<Props> = ({id}) => {
   // send when enter is clicked
   useEffect(() => {
     const send = (e: KeyboardEvent) => {
-      if (e.key === "Enter" && phrase.length > 2)
+      if (e.key === "Enter" && phrase.length > 2){
         sendMessage();
+      }
     };
     document.addEventListener("keypress", send);
     return () => {
