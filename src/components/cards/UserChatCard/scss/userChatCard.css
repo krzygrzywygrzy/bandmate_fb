@@ -60,7 +60,7 @@ textarea {
   display: flex;
   align-items: center;
   cursor: pointer;
-  padding: 0.75rem;
+  margin: 0.75rem;
 }
 .user-chat-card-avatar {
   height: 50px;
@@ -69,26 +69,31 @@ textarea {
   line-height: 50px;
 }
 .user-chat-card-avatar img {
-  height: 100%;
-  width: 100%;
   border-radius: 100%;
 }
 .user-chat-card-avatar-border {
   border: 1px solid #dddddd;
+  height: 100%;
+  width: 100%;
 }
 .user-chat-card-info {
   display: none;
+  font-size: 0.9rem;
   margin-left: 1rem;
   flex-direction: column;
   text-overflow: ellipsis;
   overflow: hidden;
-  white-space: nowrap;
+  white-space: pre-wrap;
 }
 .user-chat-card-info-last-msg {
   font-size: 0.75rem;
 }
 
 @media (min-width: 768px) {
+  .user-chat-card {
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #dddddd;
+  }
   .user-chat-card-info {
     display: flex;
   }
