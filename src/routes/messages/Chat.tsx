@@ -5,6 +5,8 @@ import "./scss/messages.css";
 import {FiSend} from "react-icons/fi";
 import {sendMessage as sendThunk} from "../../store/thunk/messagesThunks";
 import MessageBox from "./MessageBox";
+import {FiUserX} from "react-icons/fi";
+import {unmatch} from "../../store/thunk/matchesThunks";
 
 type Props = {
   id: string;
@@ -22,7 +24,7 @@ const Chat: React.FC<Props> = ({id}) => {
   // send when enter is clicked
   useEffect(() => {
     const send = (e: KeyboardEvent) => {
-      if (e.key === "Enter" && phrase.length > 2){
+      if (e.key === "Enter" && phrase.length > 2) {
         sendMessage();
       }
     };
@@ -33,12 +35,15 @@ const Chat: React.FC<Props> = ({id}) => {
   }, []);
 
   const sendMessage = async () => {
-    var res = await dispatch(sendThunk(id, phrase));
+    await dispatch(sendThunk(id, phrase));
     setPhrase("");
   }
 
   return <div className="chat">
-    <header>{chat.user.name} {chat.user.surname}</header>
+    <header>
+      <div>{chat.user.name} {chat.user.surname}</div>
+      <div className="unmatch" onClick={() => dispatch(unmatch(id))}><span>unmatch</span><FiUserX size={20}/></div>
+    </header>
     <section className="chat-messages">
       {chat && <MessageBox id={id}/>}
     </section>

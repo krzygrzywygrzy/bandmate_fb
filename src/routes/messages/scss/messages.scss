@@ -29,6 +29,19 @@
   header {
     padding: 1rem;
     border-bottom: 1px solid $gray;
+    display: flex;
+    justify-content: space-between;
+
+    .unmatch {
+      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      span {
+        margin-right: 0.5rem;
+      }
+    }
   }
 
   header, &-messages, &-input {

@@ -25,6 +25,17 @@
 .chat header {
   padding: 1rem;
   border-bottom: 1px solid #dddddd;
+  display: flex;
+  justify-content: space-between;
+}
+.chat header .unmatch {
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.chat header .unmatch span {
+  margin-right: 0.5rem;
 }
 .chat header, .chat-messages, .chat-input {
   padding: 1rem;

@@ -3,10 +3,12 @@ import {SwipesActionType, UserActionType} from "../actions/actionTypes";
 import SwipesAction from "../actions/swipesActions";
 import UserAction from "../actions/userActions";
 import {RootState} from "../store";
-import {doc, updateDoc, writeBatch,} from "firebase/firestore";
+import {doc, updateDoc, writeBatch, runTransaction} from "firebase/firestore";
 import {firestore} from "../../firebase";
 import {ThunkMessages} from "../../core/exports";
 import {v4 as uuid} from "uuid";
+import Match from "../../models/Match";
+import User from "../../models/User";
 
 export const likeOrMatch = (
     liked: boolean
@@ -77,12 +79,45 @@ export const likeOrMatch = (
   };
 };
 
-export const unmatch = (id: string):
+export const unmatch = (match_id: string):
     ThunkAction<Promise<ThunkMessages>, RootState, unknown, UserAction | SwipesAction> => {
   return async (
-      dispatch: ThunkDispatch<RootState, unknown, UserAction | SwipesAction>,): Promise<ThunkMessages> => {
+      dispatch: ThunkDispatch<RootState, unknown, UserAction | SwipesAction>,
+      getState: () => RootState,
+  ): Promise<ThunkMessages> => {
     try {
-      //TODO: implement
+      const you = getState().user.data;
+      if (!you) throw Error("User not logged in!");
+
+      const matchRef = doc(firestore, "matches", match_id);
+      const yourRef = doc(firestore, "users", you.id);
+      await runTransaction(firestore, async (transaction) => {
+        const matchDoc = await transaction.get(matchRef);
+        if (!matchDoc.exists()) {
+          throw Error("Match does not exist!");
+        }
+        const matchData = matchDoc.data() as Match;
+        const toUnmatchRef =
+            doc(firestore, "users", matchData.users.filter((el) => el !== you.id)[0]);
+        const toUnmatchDoc = await transaction.get(toUnmatchRef);
+        if(!toUnmatchDoc.exists()) {
+          throw Error("User does not exist!");
+        }
+        const toUnmatchData = toUnmatchDoc.data() as User;
+
+        await transaction.set(toUnmatchRef, {
+          likes: toUnmatchData.likes.filter(like=> like !== you.id),
+          matches: toUnmatchData.matches.filter(match => match !== match_id),
+        });
+
+        await  transaction.set(yourRef, {
+          likes: you.likes.filter(like=> like !== toUnmatchData.id),
+          matches: toUnmatchData.matches.filter(match => match !== match_id),
+        });
+
+        transaction.delete(matchRef);
+      });
+
       return ThunkMessages.SUCCESS;
     } catch (err: any) {
       return ThunkMessages.ERROR;
