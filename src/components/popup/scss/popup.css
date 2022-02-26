@@ -158,10 +158,29 @@ textarea {
   margin-bottom: 0.75rem;
 }
 
+.match-popup {
+  font-family: "Dancing Script", cursive;
+  font-weight: 700;
+  position: fixed;
+  top: 5rem;
+  left: 50%;
+  font-size: 5rem;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  width: 100vw;
+  background: #7c3aed;
+  background: linear-gradient(302deg, #7c3aed 31%, #ff00d9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 @media (min-width: 768px) {
   .login-popup {
     width: 350px;
     margin-bottom: 15rem;
+  }
+  .match-popup {
+    font-size: 8rem;
   }
 }
 /*# sourceMappingURL=popup.css.map */

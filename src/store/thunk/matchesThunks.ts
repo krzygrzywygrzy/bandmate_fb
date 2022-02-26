@@ -12,7 +12,8 @@ import User from "../../models/User";
 import ChatActions from "../actions/chatActions";
 
 export const likeOrMatch = (
-  liked: boolean
+  liked: boolean,
+  match: () => void
 ): ThunkAction<
   Promise<ThunkMessages>,
   RootState,

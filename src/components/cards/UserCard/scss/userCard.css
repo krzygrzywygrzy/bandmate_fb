@@ -1,5 +1,6 @@
 .user-card {
   width: 100%;
+  position: relative;
 }
 
 .user-card-photos {
