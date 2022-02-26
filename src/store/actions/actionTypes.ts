@@ -21,4 +21,5 @@ export enum MessagesActionType {
   LOAD = "messages_load",
   LOADED = "messages_loaded",
   ERROR = "messages_error",
+  ERASE = "messages_erase",
 }

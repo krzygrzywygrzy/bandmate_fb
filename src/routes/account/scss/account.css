@@ -112,9 +112,12 @@ textarea {
           box-sizing: border-box;
 }
 
-.account-primary-data .message {
-  margin-top: 0.5rem;
-  color: #7c3aed;
+.account-auth-data {
+  margin-top: 2rem;
+}
+
+.account-auth-data p {
+  font-size: 1.25rem;
 }
 
 button {
@@ -133,6 +136,11 @@ button {
   button {
     margin: 0;
   }
+}
+
+.message {
+  margin-top: 0.5rem;
+  color: #7c3aed;
 }
 
 .reset {

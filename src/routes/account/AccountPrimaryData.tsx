@@ -5,7 +5,7 @@ import { UserPrimary } from "../../models/User";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { updatePrimaryData } from "../../store/thunk/userThunks";
-import {ThunkMessages} from "../../core/exports";
+import { ThunkMessages } from "../../core/exports";
 
 const AccountPrimaryData: React.FC = () => {
   const [disabled, setDisabled] = useState<boolean>(true);
@@ -21,16 +21,16 @@ const AccountPrimaryData: React.FC = () => {
   });
 
   const [loading, setLoading] = useState<boolean>(false);
-  const [message, setMessage] = useState<string| null>(null);
+  const [message, setMessage] = useState<string | null>(null);
   const onSubmit: SubmitHandler<UserPrimary> = async (data) => {
     setLoading(true);
     const res: any = await dispatch(updatePrimaryData(data));
     console.log("response", res);
-    if(res === ThunkMessages.SUCCESS) {
+    if (res === ThunkMessages.SUCCESS) {
       setDisabled(true);
       setMessage("Your data has been updated!");
     } else {
-      setMessage("An error occurred! Your data ");
+      setMessage("An error occurred!");
     }
 
     setLoading(false);
