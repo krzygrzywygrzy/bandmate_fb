@@ -24,8 +24,8 @@ const UserCardPhotos: React.FC<Props> = ({ photos }) => {
       <img src={data[0]} alt="" />
     </div>
   ) : (
-    <div className="user-card-photos photo-message ">
-      This user didn't share any photos
+    <div className="user-card-photos photo-message">
+      <div>This user haven't shared any photos</div>
     </div>
   );
 };

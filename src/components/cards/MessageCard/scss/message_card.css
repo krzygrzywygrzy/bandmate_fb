@@ -2,22 +2,30 @@
   padding: 0.5rem 1rem;
   border-radius: 5px;
 }
+
 .message-card-yours {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   background: #7c3aed;
   color: white;
   justify-self: flex-end;
 }
+
 .message-card-not-yours {
   background: #dddddd;
 }
 
 .message-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   padding-bottom: 0.5rem;
 }
-.message-wrapper-yours {
-  justify-content: flex-end;
-}
 
+.message-wrapper-yours {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
 /*# sourceMappingURL=message_card.css.map */

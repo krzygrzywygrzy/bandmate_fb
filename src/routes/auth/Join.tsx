@@ -30,7 +30,7 @@ const Join: React.FC = () => {
   const [genres, setGenres] = useState<string[]>([]);
   const [instruments, setInstruments] = useState<string[]>([]);
 
-  const [spotify, setSpotify] = useState<string>();
+  const [spotify, setSpotify] = useState<string | null>("");
   const [photos, setPhotos] = useState<File[]>([]);
 
   const { register, handleSubmit } = useForm<JoinInput>();
@@ -57,7 +57,7 @@ const Join: React.FC = () => {
       delete formData.password;
       let user: User = {
         ...formData,
-        spotify,
+        spotify: spotify ?? undefined,
         id: credential.user.uid,
         instruments,
         genres,
@@ -144,7 +144,7 @@ const Join: React.FC = () => {
             placeholder="link to song or album..."
             className="text-input"
             onChange={(e) => setSpotify(e.target.value)}
-            value={spotify}
+            value={spotify ?? ""}
           />
           <br />
           {spotify && isValidUrl(spotify) && (

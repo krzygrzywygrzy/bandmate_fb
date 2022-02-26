@@ -11,6 +11,7 @@
   border-bottom: 1px solid #dddddd;
   padding: 0.5rem 1rem;
   width: 90%;
+  -webkit-transition: border 0.25s ease-in-out;
   transition: border 0.25s ease-in-out;
 }
 
@@ -32,30 +33,34 @@ textarea {
   border-radius: 5px;
   padding: 0.5rem 1rem;
   width: 90%;
+  -webkit-transition: border 0.25s ease-in-out;
   transition: border 0.25s ease-in-out;
   resize: none;
-  box-sizing: unset;
+  -webkit-box-sizing: unset;
+          box-sizing: unset;
 }
 
 @media (min-width: 768px) {
   .container {
     width: 760px;
   }
-
   .text-input {
     width: 350px;
   }
 }
+
 @media (min-width: 992px) {
   .container {
     width: 980px;
   }
 }
+
 @media (min-width: 1200px) {
   .container {
     width: 1190px;
   }
 }
+
 .popup {
   background: rgba(0, 0, 0, 0.2);
   position: fixed;
@@ -63,9 +68,15 @@ textarea {
   left: 0;
   width: 100vw;
   height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   z-index: 10;
 }
 
@@ -74,41 +85,56 @@ textarea {
   width: 90%;
   border-radius: 5px;
 }
+
 .login-popup .close {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: flex-end;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
 }
+
 .login-popup .close-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   padding: 0.75rem;
   cursor: pointer;
 }
+
 .login-popup header {
   text-align: center;
   margin-bottom: 2rem;
 }
+
 .login-popup header span {
   color: #7c3aed;
 }
+
 .login-popup .form {
   margin: 0 1rem;
   margin-bottom: 0.75rem;
 }
+
 .login-popup .form .login-input {
   width: 100%;
   padding: 0.5rem 1rem;
   border: 2px solid #dddddd;
   border-radius: 5px;
   margin-bottom: 0.5rem;
+  -webkit-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
   color: #dddddd;
   font-family: inherit;
 }
+
 .login-popup .form .login-input:focus {
   outline: none;
   border-color: #7c3aed;
   color: #7c3aed;
 }
+
 .login-popup .form button {
   padding: 0.5rem 1rem;
   background: #7c3aed;
@@ -119,11 +145,13 @@ textarea {
   font-family: inherit;
   margin: auto;
 }
+
 @media (min-width: 768px) {
   .login-popup .form button {
     margin: 0;
   }
 }
+
 .login-popup .form .err-message {
   text-align: center;
   color: #7c3aed;
@@ -136,5 +164,4 @@ textarea {
     margin-bottom: 15rem;
   }
 }
-
 /*# sourceMappingURL=popup.css.map */

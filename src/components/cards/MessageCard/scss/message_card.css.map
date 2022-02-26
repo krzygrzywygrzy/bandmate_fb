@@ -1,1 +1,10 @@
-{"version":3,"sourceRoot":"","sources":["message_card.scss","../../../../scss/_colors.scss"],"names":[],"mappings":"AAEA;EACE;EACA;;AAEA;EACE;EACA,YCRK;EDSL;EACA;;AAGF;EACE,YCbG;;;ADiBP;EACE;EACA;;AAEA;EACE","file":"message_card.css"}
+{
+    "version": 3,
+    "mappings": "AAEA,AAAA,aAAa,CAAC;EACZ,OAAO,EAAE,WAAW;EACpB,aAAa,EAAE,GAAG;CAYnB;;AAVE,AAAD,mBAAO,CAAC;EACN,OAAO,EAAE,IAAI;EACb,UAAU,ECRL,OAAO;EDSZ,KAAK,EAAE,KAAK;EACZ,YAAY,EAAE,QAAQ;CACvB;;AAEA,AAAD,uBAAW,CAAC;EACV,UAAU,ECbP,OAAkB;CDctB;;AAGH,AAAA,gBAAgB,CAAC;EACf,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,MAAM;CAKvB;;AAHE,AAAD,sBAAO,CAAA;EACL,eAAe,EAAE,QAAQ;CAC1B",
+    "sources": [
+        "message_card.scss",
+        "../../../../scss/_colors.scss"
+    ],
+    "names": [],
+    "file": "message_card.css"
+}

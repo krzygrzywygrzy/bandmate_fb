@@ -1,55 +1,81 @@
 .user-card {
   width: 100%;
 }
+
 .user-card-photos {
   width: 100%;
-  height: 90vw;
+  height: calc(100vw * 0.9);
   border-radius: 5px;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
 }
+
 .user-card-photos img {
   height: 100%;
   width: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-radius: 5px;
-  user-select: none;
+  -ms-user-select: none;
+      user-select: none;
   -moz-user-select: none;
   -khtml-user-select: none;
   -webkit-user-select: none;
   -o-user-select: none;
 }
+
 .user-card-message {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  text-align: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   color: #7c3aed;
 }
+
 .user-card-primary {
   font-weight: 600;
   font-size: 1.25rem;
 }
+
 .user-card-list div {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
+
 .user-card-list span {
   padding-bottom: 0.25rem;
   font-size: 0.75rem;
 }
+
 .user-card .like-dislike {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
+
 .user-card .like-dislike-button {
   margin: 0.25rem 0.5rem;
   cursor: pointer;
   color: #7c3aed;
   text-align: center;
 }
+
 .user-card .like-dislike-button span {
   font-size: 0.75rem;
   display: block;
 }
+
 .user-card section {
   margin-top: 0.5rem;
   text-align: left;
@@ -57,6 +83,15 @@
 
 .photo-message {
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 @media (min-width: 768px) {
@@ -67,5 +102,4 @@
     height: 400px;
   }
 }
-
 /*# sourceMappingURL=userCard.css.map */

@@ -8,6 +8,11 @@
     border-right: 1px solid $gray;
   }
 
+  &-empty {
+    padding: 1rem;
+    font-size: 0.75rem;
+  }
+
   &-chat-container {
     width: 100%;
     height: 100%;
@@ -44,7 +49,9 @@
     }
   }
 
-  header, &-messages, &-input {
+  header,
+  &-messages,
+  &-input {
     padding: 1rem;
   }
 
@@ -54,8 +61,8 @@
     margin-bottom: 0;
     margin-top: 0.25rem;
     overflow-y: scroll;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
   }
 
   &-messages::-webkit-scrollbar {
@@ -117,7 +124,7 @@
     }
 
     .yes-button {
-      background:$purple;
+      background: $purple;
       color: white;
       padding: 0.5rem 1rem;
       margin-left: 1rem;
@@ -128,7 +135,6 @@
 
 @media (min-width: 768px) {
   .messages {
-
     &-list {
       width: 280px;
     }
@@ -138,4 +144,3 @@
     width: 350px;
   }
 }
-

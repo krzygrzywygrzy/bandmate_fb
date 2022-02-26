@@ -5,27 +5,30 @@
   align-items: center;
   cursor: pointer;
   margin: 0.75rem;
-
+  border-radius: 5px;
+  padding-top: 0.5rem;
+  padding-left: 0.5rem;
 
   &-avatar {
     height: 50px;
     width: 50px;
     text-align: center;
     line-height: 50px;
+    border: 1px solid $gray;
+    border-radius: 100%;
+    font-size: 0.7rem;
+    background: white;
 
-      img {
+    img {
+      border-radius: 100%;
+    }
 
-        border-radius: 100%;
-      }
-
-      &-border {
-        border: 1px solid $gray;
-        height: 100%;
-        width: 100%;
-      }
-
+    &-border {
+      border: 1px solid $gray;
+      height: 100%;
+      width: 100%;
+    }
   }
-
 
   &-info {
     display: none;
@@ -40,6 +43,10 @@
       font-size: 0.75rem;
     }
   }
+}
+
+.user-chat-card:hover {
+  background: #f1f1f1;
 }
 
 @media (min-width: 768px) {

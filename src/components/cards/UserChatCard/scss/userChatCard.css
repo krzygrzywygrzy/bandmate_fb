@@ -11,6 +11,7 @@
   border-bottom: 1px solid #dddddd;
   padding: 0.5rem 1rem;
   width: 90%;
+  -webkit-transition: border 0.25s ease-in-out;
   transition: border 0.25s ease-in-out;
 }
 
@@ -32,61 +33,88 @@ textarea {
   border-radius: 5px;
   padding: 0.5rem 1rem;
   width: 90%;
+  -webkit-transition: border 0.25s ease-in-out;
   transition: border 0.25s ease-in-out;
   resize: none;
-  box-sizing: unset;
+  -webkit-box-sizing: unset;
+          box-sizing: unset;
 }
 
 @media (min-width: 768px) {
   .container {
     width: 760px;
   }
-
   .text-input {
     width: 350px;
   }
 }
+
 @media (min-width: 992px) {
   .container {
     width: 980px;
   }
 }
+
 @media (min-width: 1200px) {
   .container {
     width: 1190px;
   }
 }
+
 .user-chat-card {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   cursor: pointer;
   margin: 0.75rem;
+  border-radius: 5px;
+  padding-top: 0.5rem;
+  padding-left: 0.5rem;
 }
+
 .user-chat-card-avatar {
   height: 50px;
   width: 50px;
   text-align: center;
   line-height: 50px;
+  border: 1px solid #dddddd;
+  border-radius: 100%;
+  font-size: 0.7rem;
+  background: white;
 }
+
 .user-chat-card-avatar img {
   border-radius: 100%;
 }
+
 .user-chat-card-avatar-border {
   border: 1px solid #dddddd;
   height: 100%;
   width: 100%;
 }
+
 .user-chat-card-info {
   display: none;
   font-size: 0.9rem;
   margin-left: 1rem;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: pre-wrap;
 }
+
 .user-chat-card-info-last-msg {
   font-size: 0.75rem;
+}
+
+.user-chat-card:hover {
+  background: #f1f1f1;
 }
 
 @media (min-width: 768px) {
@@ -95,8 +123,9 @@ textarea {
     border-bottom: 1px solid #dddddd;
   }
   .user-chat-card-info {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
   }
 }
-
 /*# sourceMappingURL=userChatCard.css.map */

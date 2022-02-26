@@ -1,9 +1,11 @@
 #join {
   margin-top: 2rem;
 }
+
 #join form div {
   margin-bottom: 1rem;
 }
+
 #join form button {
   margin-top: 2rem;
   border: none;
@@ -16,10 +18,12 @@
   width: 100%;
   cursor: pointer;
 }
+
 #join form .message {
   padding-top: 1rem;
   color: #7c3aed;
 }
+
 #join section {
   margin-top: 2rem;
 }
@@ -40,15 +44,12 @@
   #join form button {
     width: 350px;
   }
-
   .join-width {
     width: 350px;
     margin: 0;
   }
-
   .section-title {
     font-size: 1.75rem;
   }
 }
-
 /*# sourceMappingURL=join.css.map */
