@@ -18,7 +18,7 @@ type Props = {
 const UserCard: React.FC<Props> = ({ user }) => {
   const dispatch = useDispatch();
 
-  const [matchPopup, setMatchPopup] = useState<boolean>(true);
+  const [matchPopup, setMatchPopup] = useState<boolean>(false);
 
   const [message, setMessage] = useState<string | null>(null);
   const handleLiking = async () => {
@@ -28,7 +28,7 @@ const UserCard: React.FC<Props> = ({ user }) => {
     } else setMessage(null);
   };
 
-  const showMatchPopup = () => {};
+  const showMatchPopup = () => setMatchPopup(true);
 
   return (
     <div className="user-card">

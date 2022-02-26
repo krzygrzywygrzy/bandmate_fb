@@ -6,7 +6,11 @@ type Props = {
   close: Function;
 };
 
-const MatchPopup: React.FC<Props> = ({ trigger }) => {
+const MatchPopup: React.FC<Props> = ({ trigger, close }) => {
+  useEffect(() => {
+    setTimeout(close, 4000);
+  }, []);
+
   return trigger ? <div className="match-popup">It's a match</div> : <></>;
 };
 

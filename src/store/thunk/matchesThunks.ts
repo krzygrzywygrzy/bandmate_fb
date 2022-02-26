@@ -1,5 +1,9 @@
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
-import { SwipesActionType, UserActionType } from "../actions/actionTypes";
+import {
+  ChatActionType,
+  SwipesActionType,
+  UserActionType,
+} from "../actions/actionTypes";
 import SwipesAction from "../actions/swipesActions";
 import UserAction from "../actions/userActions";
 import { RootState } from "../store";
@@ -13,15 +17,19 @@ import ChatActions from "../actions/chatActions";
 
 export const likeOrMatch = (
   liked: boolean,
-  match: () => void
+  matchPopup: () => void
 ): ThunkAction<
   Promise<ThunkMessages>,
   RootState,
   unknown,
-  UserAction | SwipesAction
+  UserAction | SwipesAction | ChatActions
 > => {
   return async (
-    dispatch: ThunkDispatch<RootState, unknown, UserAction | SwipesAction>,
+    dispatch: ThunkDispatch<
+      RootState,
+      unknown,
+      UserAction | SwipesAction | ChatActions
+    >,
     getState: () => RootState
   ): Promise<ThunkMessages> => {
     try {
@@ -30,13 +38,11 @@ export const likeOrMatch = (
 
       if (liked) {
         const you = getState().user.data!;
-
         if (!you) throw Error("User not logged in!");
 
         const swipe = getState().swipes.data![0];
         if (swipe.likes.includes(you.id)) {
           const match_id = uuid();
-
           //match
           const batch = writeBatch(firestore);
 
@@ -65,6 +71,18 @@ export const likeOrMatch = (
             type: UserActionType.LOADED,
             payload: { ...you, ...toUpdate },
           });
+
+          //add new chat to chats
+          const chats = getState().chats.data;
+          if (!chats) throw Error();
+          dispatch({
+            type: ChatActionType.LOADED,
+            payload: [...chats, { user: swipe, id: match_id }],
+          });
+
+          //display popup
+          matchPopup();
+          await new Promise((resolve) => setTimeout(resolve, 3000));
         } else {
           //add swipe to your likes
           await updateDoc(doc(firestore, "users", you.id), {
@@ -72,7 +90,6 @@ export const likeOrMatch = (
           });
         }
       }
-
       //in the end just remove first user from array
       dispatch({
         type: SwipesActionType.LOADED,
@@ -125,12 +142,12 @@ export const unmatch = (
         }
         const toUnmatchData = toUnmatchDoc.data() as User;
 
-        await transaction.update(toUnmatchRef, {
+        transaction.update(toUnmatchRef, {
           likes: toUnmatchData.likes.filter((like) => like !== you.id),
           matches: toUnmatchData.matches.filter((match) => match !== match_id),
         });
 
-        await transaction.update(yourRef, {
+        transaction.update(yourRef, {
           likes: you.likes.filter((like) => like !== toUnmatchData.id),
           matches: toUnmatchData.matches.filter((match) => match !== match_id),
         });
