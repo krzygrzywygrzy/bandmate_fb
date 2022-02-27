@@ -6,7 +6,7 @@ import "./navbar.css";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../../firebase";
 import { useLocation } from "wouter";
-import {FiMessageCircle, FiUser, FiTarget} from "react-icons/fi";
+import { FiMessageCircle, FiUser, FiTarget } from "react-icons/fi";
 
 const Navbar: React.FC = () => {
   const [, setLocation] = useLocation();

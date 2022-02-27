@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import UserCard from "../../components/cards/UserCard/UserCard";
 import { RootState } from "../../store/store";
 import { loadSwipes } from "../../store/thunk/swipesThunks";
-import { getUser } from "../../store/thunk/userThunks";
 import "./scss/home.css";
 
 const Home: React.FC = () => {
@@ -23,7 +22,7 @@ const Home: React.FC = () => {
     );
   }
 
-  return swipes.data  ? (
+  return swipes.data ? (
     <div className="container home">
       {swipes.data.length > 0 ? (
         <div className="home-user-display">

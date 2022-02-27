@@ -40,6 +40,7 @@ const Chat: React.FC<Props> = ({ id }) => {
     return () => {
       document.removeEventListener("keypress", send);
     };
+    // eslint-disable-next-line
   }, []);
 
   const sendMessage = async () => {
