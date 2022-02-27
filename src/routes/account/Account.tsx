@@ -8,6 +8,7 @@ import { useLocation } from "wouter";
 import AccountPrimaryData from "./AccountPrimaryData";
 import AuthWrapper from "../../components/AuthWrapper";
 import AccountAuthData from "./AccountAuthData";
+import AccountEmail from "./AccountEmail";
 
 const Account: React.FC = () => {
   const [, setLocation] = useLocation();
@@ -43,6 +44,7 @@ const Account: React.FC = () => {
         </header>
         <AccountPrimaryData />
         <AccountAuthData />
+        <AccountEmail />
       </div>
     </AuthWrapper>
   ) : (

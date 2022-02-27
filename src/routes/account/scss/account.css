@@ -112,11 +112,11 @@ textarea {
           box-sizing: border-box;
 }
 
-.account-auth-data {
+.account-auth-data, .account-email {
   margin-top: 2rem;
 }
 
-.account-auth-data p {
+.account-auth-data p, .account-email p {
   font-size: 1.25rem;
 }
 
