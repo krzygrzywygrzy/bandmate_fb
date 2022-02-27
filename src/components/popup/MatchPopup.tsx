@@ -9,6 +9,7 @@ type Props = {
 const MatchPopup: React.FC<Props> = ({ trigger, close }) => {
   useEffect(() => {
     setTimeout(close, 4000);
+    // eslint-disable-next-line
   }, []);
 
   return trigger ? <div className="match-popup">It's a match</div> : <></>;
